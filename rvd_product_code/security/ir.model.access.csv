@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rvd_product_code,rvd.product.code,model_rvd_product_code,base.group_user,1,1,1,1
+access_rvd_product_alias,rvd.product.alias,model_rvd_product_alias,base.group_user,1,1,1,1
+access_rvd_product_alias_line,rvd.product.alias.line,model_rvd_product_alias_line,base.group_user,1,1,1,1
+access_rvd_pm_service,rvd.pm.service,model_rvd_pm_service,base.group_user,1,1,1,1
+access_rvd_edit_cross,rvd.edit.cross,model_rvd_edit_cross,base.group_user,1,1,1,1
+access_merge_brand,merge.brand,model_merge_brand,base.group_user,1,1,1,1

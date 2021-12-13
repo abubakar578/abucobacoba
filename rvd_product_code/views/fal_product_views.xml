@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="fal_product_rvd_code">
+            <field name="name">fal.product.code.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name= 'options']" position="inside">
+                    <div>
+                        <field name="delivery_ok"/>
+                        <label for="delivery_ok"/>
+                    </div>
+                </xpath>
+                <xpath expr="//label[@for='name']" position="attributes">
+                    <attribute name="string">Part Number</attribute>
+                </xpath>
+                <field name="categ_id" position="after">
+                    <field name="service_hours_ids" widget="many2many_tags"/>
+                    <field name="rvd_product_template_code_id" string="Rivindi Product Code" attrs="{'invisible': [('active', '=', False)]}"/>
+                    <field name="rvd_product_cr_code_id" string="Rivindi Product Code" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="rvd_discontinue_status"/>
+                    <field name="rvd_product_status"/>
+                    <field name="rvd_limit_stock" attrs="{'invisible': [('rvd_product_status', '!=', 'needed')]}"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fal_product_rvd_code_inherit">
+            <field name="name">fal.product.code.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="rvd_product_web_data.fal_product_web_data"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='cross_reference_ids']" position="attributes">
+                    <attribute name="context">{'default_active': False, 'default_rvd_product_cr_code_id': rvd_product_template_code_id}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fal_product_rvd_code_image_tree">
+            <field name="name">product.tree.image</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="image_1920" widget="image"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fal_product_rvd_code_search">
+            <field name="name">product.template.search</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="processed_name"/>
+                    <field name="cross_reference_ids" context="{'active_test': False}" domain="[('active','=',False)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_rvd_product_attributes_alias_tree" model="ir.ui.view">
+            <field name="name">rvd.product.attribute.tree</field>
+            <field name="model">rvd.product.attribute</field>
+            <field name="inherit_id" ref="rvd_product_web_data.view_rvd_product_attributes_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="attribute_alias_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_rvd_product_code_tree" model="ir.ui.view">
+            <field name="name">rvd.product.code.tree</field>
+            <field name="model">rvd.product.code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="product_tmpl_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_fal_calendar_event_kanban">
+            <field name="name">rvd.product.code.kanban</field>
+            <field name="model">rvd.product.code</field>
+            <field name="arch" type="xml">
+                <kanban sample="1">
+                    <field name="id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('rvd.product.code', 'image_1920', record.id.raw_value)" alt="Product" class="o_image_64_contain"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_rvd_product_code_search" model="ir.ui.view">
+            <field name="name">rvd.product.code.seacrh</field>
+            <field name="model">rvd.product.code</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="cross_reference_ids" context="{'active_test': False}" domain="[('active','=',False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_rvd_product_code_form" model="ir.ui.view">
+            <field name="name">rvd.product.code.form</field>
+            <field name="model">rvd.product.code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <field name="active" invisible="1"/>
+                        <field name="image_1920" widget="image" class="oe_avatar"/>
+                        <field name="second_image" widget="image" class="oe_avatar"/>
+                        <field name="third_image" widget="image" class="oe_avatar"/>
+
+                        <div class="oe_title">
+                            <h1><field name="name" placeholder="Product Name"/></h1>
+                        </div>
+
+                        <group>
+                            <group>
+                                <field name="product_model"/>
+                                <field name="product_remark"/>
+                            </group>
+                            <group>
+                                <field name="product_detail"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="inner_secoundary_ids" widget="many2many_tags"/>
+                                <field name="outer_primary_keycode_ids" widget="many2many_tags"/>
+                                <field name="alterneted_keycode_ids" widget="many2many_tags"/>
+                                <field name="replacement_element_for_ids" widget="many2many_tags"/>
+                                <field name="replacement_element"/>
+                            </group>
+                            <group>
+                                <field name="set_numbers" widget="many2many_tags"/>
+                                <field name="housing_for_ids" widget="many2many_tags"/>
+                                <field name="element_for_ids" widget="many2many_tags"/>
+                                <field name="bowl_for_ids" widget="many2many_tags"/>
+                                <field name="heading_setting_for_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+
+                        <group string="SKU">
+                            <field name="product_tmpl_ids" nolabel="1" context="{'default_rvd_product_cr_code_id': id}">
+                                <tree editable="bottom" delete="0">
+                                    <field name="image_1920" widget="image"/>
+                                    <field name="name" string="Part Number"/>
+                                    <field name="rvd_product_cr_code_id" invisible="1"/>
+                                    <field name="product_brand_id" required="1"/>
+                                    <field name="default_code"/>
+                                    <field name="responsible_id"/>
+                                    <field name="qty_available"/>
+                                    <field name="virtual_available"/>
+                                    <field name="service_hours_ids" widget="many2many_tags"/>
+                                    <button name="add_image" icon="fa-plus" string="Add Image" type="object" confirm="You sure add image on ritma code?"/>
+                                    <button name="update_product" string="Edit" type="object" confirm="You sure edit product?"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <notebook>
+                            <page string="Cross Reference">
+                                <field name="cross_reference_ids" context="{'default_active': False}">
+                                    <tree editable="bottom" delete="0">
+                                        <field name="active" invisible="1"/>
+                                        <field name="name" string="Cross Number"/>
+                                        <field name="product_brand_id" string="Brand Manufacture" required="1"/>
+                                        <field name="show_on_website"/>
+                                        <field name="image_on_website"/>
+                                        <button name="delete_ritma_code" icon="fa-trash-o" type="object" confirm="You sure delete this record?"/>
+                                    </tree>
+                                </field>
+                                <button name="show_on_web_true" string="Select All to web" type="object" confirm="You sure update this record?"/>
+                                <button name="show_on_web_false" string="Unselect All to web" type="object" confirm="You sure update this record?"/>
+                            </page>
+                            <page string="Attributes">
+                                <field name="rvd_product_attributes_ids">
+                                    <tree editable="bottom" delete="0">
+                                        <field name="product_tmpl_id" invisible="1"/>
+                                        <field name="attribute_alias_id"/>
+                                        <field name="name"/>
+                                        <field name="value"/>
+                                        <field name="value_int" invisible="0" readonly="0"/>
+                                        <button name="unlink" icon="fa-trash-o" type="object" confirm="You sure delete this record?"/>
+                                        <!-- <button name="delete_ritma_code" icon="fa-trash-o" type="object" confirm="You sure delete this record?"/> -->
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Equipments">
+                                <field name="product_equipment_ids">
+                                    <tree editable="bottom" delete="0">
+                                        <field name="product_tmpl_id" invisible="1"/>
+                                        <field name="name" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}" string="Equipment Type"/>
+                                        <field name="service_hours" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="year" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="equipment_type" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}" string="Equipment Brand"/>
+                                        <field name="equipment_options" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="engine" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="engine_options" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="fuel" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="cc" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <field name="kw" attrs="{'readonly': [('product_tmpl_id', '!=', False)]}"/>
+                                        <!-- <button name="unlink" confirm="You sure delete this record?" icon="fa-trash-o" type="object"/> -->
+                                        <button name="delete_ritma_code" icon="fa-trash-o" type="object" confirm="You sure delete this record?"/>
+                                    </tree>
+
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_rvd_product_code" model="ir.actions.act_window">
+            <field name="name">Ritma Code</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rvd.product.code</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+        </record>
+
+        <menuitem id="menu_rvd_product_code" action="action_rvd_product_code" parent="stock.menu_product_in_config_stock" sequence="5"/>
+
+        <!-- ALIAS -->
+        <record id="view_rvd_product_alias_tree" model="ir.ui.view">
+            <field name="name">rvd.product.alias.tree</field>
+            <field name="model">rvd.product.alias</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="alias_line_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_rvd_product_alias_form" model="ir.ui.view">
+            <field name="name">rvd.product.alias.form</field>
+            <field name="model">rvd.product.alias</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <notebook>
+                            <page string="Attibutes Alias">
+                                <field name="alias_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_rvd_product_alias" model="ir.actions.act_window">
+            <field name="name">Ritma Product Attibute Alias</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">rvd.product.alias</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_rvd_product_alias" action="action_rvd_product_alias" parent="stock.menu_product_in_config_stock" sequence="6"/>
+
+    </data>
+</odoo>

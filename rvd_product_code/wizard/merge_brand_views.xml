@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_merge_brand_form" model="ir.ui.view">
+            <field name="name">merge.brand.form</field>
+            <field name="model">merge.brand</field>
+            <field name="arch" type="xml">
+                <form string="Merge Brand">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="list_brand_ids" readonly="1" widget="many2many_tags"/>
+                                <field name="product_brand_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string='Confirm' name="merge_brand" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

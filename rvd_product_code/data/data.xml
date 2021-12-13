@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequences for Rivindi Product Code -->
+        <record id="rvd_seq_rvd_product_code" model="ir.sequence">
+            <field name="name">Ritma Product Code Sequence</field>
+            <field name="code">rvd.product.code.seq</field>
+            <field name="prefix">R.%(year)s.%(month)s.</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+    <data>
+        <record model="ir.actions.server" id="action_mass_update_rvd_code">
+            <field name="name">Update Ritma Code</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="binding_model_id" ref="product.model_product_template" />
+            <field name="state">code</field>
+            <field name="code">
+for product_template in records:
+    product_template.with_context(automated=True).update_ritma_code_in_product()
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_mass_update_product_attributes">
+            <field name="name">Update Product Attributes</field>
+            <field name="model_id" ref="rvd_product_code.model_rvd_product_code"/>
+            <field name="binding_model_id" ref="rvd_product_code.model_rvd_product_code" />
+            <field name="state">code</field>
+            <field name="code">
+for code in records:
+    code._compute_product_attributes()
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_mass_update_ritma_code">
+            <field name="name">Update Ritma Code</field>
+            <field name="model_id" ref="rvd_product_code.model_rvd_product_code"/>
+            <field name="binding_model_id" ref="rvd_product_code.model_rvd_product_code"/>
+            <field name="state">code</field>
+            <field name="code">
+for code in records:
+    code.update_ritma_code()
+            </field>
+        </record>
+
+        <record id="action_merge_brand" model="ir.actions.server">
+            <field name="name">Merge Brand</field>
+            <field name="model_id" ref="product_brand.model_product_brand"/>
+            <field name="binding_model_id" ref="product_brand.model_product_brand"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+if records:
+    for rec in records:
+        action = rec.action_merge_brand()
+            </field>
+        </record>
+
+    </data>
+    <data>
+        <record id="description" model="rvd.product.alias">
+            <field name="name">DESCRIPTION</field>
+        </record>
+        <record id="filter" model="rvd.product.alias.line">
+            <field name="name">FILTER TYPE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="description"/>
+        </record>
+
+        <record id="product_model" model="rvd.product.alias">
+            <field name="name">PRODUCT MODEL</field>
+        </record>
+        <record id="model" model="rvd.product.alias.line">
+            <field name="name">MODEL</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="product_model"/>
+        </record>
+        <record id="style" model="rvd.product.alias.line">
+            <field name="name">STYLE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="product_model"/>
+        </record>
+
+        <record id="product_detail" model="rvd.product.alias">
+            <field name="name">PRODUCT DETAIL</field>
+        </record>
+        <record id="filter_info" model="rvd.product.alias.line">
+            <field name="name">FILTER INFO</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="product_detail"/>
+        </record>
+        <record id="contains" model="rvd.product.alias.line">
+            <field name="name">CONTAINS</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="product_detail"/>
+        </record>
+
+        <record id="product_remark" model="rvd.product.alias">
+            <field name="name">PRODUCT REMARKS</field>
+        </record>
+        <record id="remark" model="rvd.product.alias.line">
+            <field name="name">REMARK</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="product_remark"/>
+        </record>
+        <record id="notes" model="rvd.product.alias.line">
+            <field name="name">NOTES</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="product_remark"/>
+        </record>
+
+        <record id="brand_manufacture" model="rvd.product.alias">
+            <field name="name">BRAND MANUFACTURE</field>
+        </record>
+        <record id="brand_manufacture_line1" model="rvd.product.alias.line">
+            <field name="name">BRAND MANUFACTURE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="brand_manufacture"/>
+        </record>
+
+        <record id="height" model="rvd.product.alias">
+            <field name="name">HEIGHT</field>
+        </record>
+        <record id="h1_line1" model="rvd.product.alias.line">
+            <field name="name">H 1 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="height"/>
+        </record>
+        <record id="length_line1" model="rvd.product.alias.line">
+            <field name="name">LENGTH</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="height"/>
+        </record>
+        <record id="overall_height" model="rvd.product.alias.line">
+            <field name="name">OVERALL HEIGHT</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="height"/>
+        </record>
+        <record id="h_line1" model="rvd.product.alias.line">
+            <field name="name">H</field>
+            <field name="sequence">4</field>
+            <field name="product_alias_id" ref="height"/>
+        </record>
+
+        <record id="height2" model="rvd.product.alias">
+            <field name="name">HEIGHT2</field>
+        </record>
+        <record id="h1_line1" model="rvd.product.alias.line">
+            <field name="name">H 2 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="height2"/>
+        </record>
+
+        <record id="od" model="rvd.product.alias">
+            <field name="name">OD</field>
+        </record>
+        <record id="od_line" model="rvd.product.alias.line">
+            <field name="name">OD 1 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="od"/>
+        </record>
+        <record id="outer_diameter" model="rvd.product.alias.line">
+            <field name="name">OUTER DIAMETER</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="od"/>
+        </record>
+        <record id="largest_od" model="rvd.product.alias.line">
+            <field name="name">LARGEST OD</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="od"/>
+        </record>
+        <record id="o_d_line" model="rvd.product.alias.line">
+            <field name="name">O.D</field>
+            <field name="sequence">4</field>
+            <field name="product_alias_id" ref="od"/>
+        </record>
+        <record id="a_line" model="rvd.product.alias.line">
+            <field name="name">A</field>
+            <field name="sequence">5</field>
+            <field name="product_alias_id" ref="od"/>
+        </record>
+
+        <record id="od2" model="rvd.product.alias">
+            <field name="name">OD2</field>
+        </record>
+        <record id="od2_line" model="rvd.product.alias.line">
+            <field name="name">OD 2 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="od2"/>
+        </record>
+
+        <record id="id" model="rvd.product.alias">
+            <field name="name">ID</field>
+        </record>
+        <record id="id_line" model="rvd.product.alias.line">
+            <field name="name">ID 1 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="id"/>
+        </record>
+        <record id="inner_diameter" model="rvd.product.alias.line">
+            <field name="name">INNER DIAMETER</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="id"/>
+        </record>
+        <record id="i_d_line" model="rvd.product.alias.line">
+            <field name="name">I.D</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="id"/>
+        </record>
+        <record id="b_line" model="rvd.product.alias.line">
+            <field name="name">B</field>
+            <field name="sequence">4</field>
+            <field name="product_alias_id" ref="id"/>
+        </record>
+
+        <record id="id2" model="rvd.product.alias">
+            <field name="name">ID</field>
+        </record>
+        <record id="id_line2" model="rvd.product.alias.line">
+            <field name="name">ID 2 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="id2"/>
+        </record>
+
+        <record id="litre" model="rvd.product.alias">
+            <field name="name">Litre</field>
+        </record>
+        <record id="id_line2" model="rvd.product.alias.line">
+            <field name="name">Litre</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="litre"/>
+        </record>
+
+        <record id="ampere" model="rvd.product.alias">
+            <field name="name">Ampere</field>
+        </record>
+        <record id="id_line2" model="rvd.product.alias.line">
+            <field name="name">Ampere</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="ampere"/>
+        </record>
+
+        <record id="thread_size" model="rvd.product.alias">
+            <field name="name">THREAD SIZE</field>
+        </record>
+        <record id="thread_size_line" model="rvd.product.alias.line">
+            <field name="name">THREAD SIZE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="thread_size"/>
+        </record>
+        <record id="thread_line" model="rvd.product.alias.line">
+            <field name="name">THREAD</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="thread_size"/>
+        </record>
+        <record id="g_line" model="rvd.product.alias.line">
+            <field name="name">G</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="thread_size"/>
+        </record>
+
+        <record id="thread_nut_size" model="rvd.product.alias">
+            <field name="name">THREAD NUT SIZE</field>
+        </record>
+        <record id="thread_nut_size_line" model="rvd.product.alias.line">
+            <field name="name">THREAD NUT SIZE (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="thread_nut_size"/>
+        </record>
+        <record id="thread_nut_size_line" model="rvd.product.alias.line">
+            <field name="name">OUTLET SIZE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="thread_nut_size"/>
+        </record>
+
+        <record id="flange_hat" model="rvd.product.alias">
+            <field name="name">FLANGE / HAT</field>
+        </record>
+        <record id="od_2_line" model="rvd.product.alias.line">
+            <field name="name">OD 2 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="flange_hat"/>
+        </record>
+
+        <record id="length" model="rvd.product.alias">
+            <field name="name">LENGTH</field>
+        </record>
+        <record id="length_line2" model="rvd.product.alias.line">
+            <field name="name">LENGTH 1 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="length"/>
+        </record>
+        <record id="size_line1" model="rvd.product.alias.line">
+            <field name="name">SIZE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="length"/>
+        </record>
+
+        <record id="length2" model="rvd.product.alias">
+            <field name="name">LENGTH</field>
+        </record>
+        <record id="length2_line2" model="rvd.product.alias.line">
+            <field name="name">LENGTH 2 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="length2"/>
+        </record>
+        <record id="size2_line1" model="rvd.product.alias.line">
+            <field name="name">SIZE 2</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="length2"/>
+        </record>
+
+        <record id="width" model="rvd.product.alias">
+            <field name="name">WIDTH</field>
+        </record>
+        <record id="width_line1" model="rvd.product.alias.line">
+            <field name="name">WIDTH 1 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="width"/>
+        </record>
+        <record id="size_width_line1" model="rvd.product.alias.line">
+            <field name="name">SIZE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="width"/>
+        </record>
+
+        <record id="width2" model="rvd.product.alias">
+            <field name="name">WIDTH</field>
+        </record>
+        <record id="width2_line1" model="rvd.product.alias.line">
+            <field name="name">WIDTH 2 (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="width2"/>
+        </record>
+
+        <record id="intake_connection_id" model="rvd.product.alias">
+            <field name="name">INTAKE CONNECTION ID</field>
+        </record>
+        <record id="intake_connection_id_line" model="rvd.product.alias.line">
+            <field name="name">INTAKE CONNECTION ID</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="intake_connection_id"/>
+        </record>
+
+        <record id="intake_connection_height" model="rvd.product.alias">
+            <field name="name">INTAKE CONNECTION HEIGHT</field>
+        </record>
+        <record id="intake_connection_height_line" model="rvd.product.alias.line">
+            <field name="name">INTAKE CONNECTION HEIGHT</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="intake_connection_height"/>
+        </record>
+
+        <record id="gasket_type" model="rvd.product.alias">
+            <field name="name">GASKET TYPE</field>
+        </record>
+        <record id="gasket_type_line" model="rvd.product.alias.line">
+            <field name="name">GASKET TYPE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="gasket_type"/>
+        </record>
+
+        <record id="gasket_od" model="rvd.product.alias">
+            <field name="name">GASKET OD</field>
+        </record>
+        <record id="gasket_od_mm_line" model="rvd.product.alias.line">
+            <field name="name">GASKET OD (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="gasket_od"/>
+        </record>
+        <record id="gasket_od_line" model="rvd.product.alias.line">
+            <field name="name">GASKET OD</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="gasket_od"/>
+        </record>
+        <record id="c_line" model="rvd.product.alias.line">
+            <field name="name">C</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="gasket_od"/>
+        </record>
+
+        <record id="gasket_id" model="rvd.product.alias">
+            <field name="name">GASKET ID</field>
+        </record>
+        <record id="gasket_id_mm_line" model="rvd.product.alias.line">
+            <field name="name">GASKET ID (MM)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="gasket_id"/>
+        </record>
+        <record id="gasket_id_line" model="rvd.product.alias.line">
+            <field name="name">GASKET ID</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="gasket_id"/>
+        </record>
+        <record id="gasket_inside_diameter_line" model="rvd.product.alias.line">
+            <field name="name">GASKET INSIDE DIAMETER</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="gasket_id"/>
+        </record>
+        <record id="gasket_id_b_line" model="rvd.product.alias.line">
+            <field name="name">B</field>
+            <field name="sequence">4</field>
+            <field name="product_alias_id" ref="gasket_id"/>
+        </record>
+
+        <record id="anti_back_drain_valve" model="rvd.product.alias">
+            <field name="name">ANTI BACK DRAIN VALVE</field>
+        </record>
+        <record id="anti_back_drain_valve_line" model="rvd.product.alias.line">
+            <field name="name">ANTI BACK DRAIN VALVE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="anti_back_drain_valve"/>
+        </record>
+        <record id="anti_drain_back_valve_line" model="rvd.product.alias.line">
+            <field name="name">ANTI DRAIN BACK VALVE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="anti_back_drain_valve"/>
+        </record>
+
+        <record id="bypass_valve" model="rvd.product.alias">
+            <field name="name">BYPASS VALVE(KG/CM2)</field>
+        </record>
+        <record id="bypass_valve_line1" model="rvd.product.alias.line">
+            <field name="name">BYPASS VALVE(KG/CM2)</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="bypass_valve"/>
+        </record>
+        <record id="bypass_valve_line2" model="rvd.product.alias.line">
+            <field name="name">BYPASS VALVE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="bypass_valve"/>
+        </record>
+        <record id="bypass_valve_line2" model="rvd.product.alias.line">
+            <field name="name">BYPASS VALVE OPENING PRESSURE</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="bypass_valve"/>
+        </record>
+
+        <record id="product_function" model="rvd.product.alias">
+            <field name="name">PRODUCT FUNCTION</field>
+        </record>
+        <record id="product_function_line1" model="rvd.product.alias.line">
+            <field name="name">PRODUCT FUNCTION</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="product_function"/>
+        </record>
+        <record id="type_line2" model="rvd.product.alias.line">
+            <field name="name">TYPE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="product_function"/>
+        </record>
+
+        <record id="bowl_thread_size" model="rvd.product.alias">
+            <field name="name">BOWL THREAD SIZE</field>
+        </record>
+        <record id="bowl_thread_size_line" model="rvd.product.alias.line">
+            <field name="name">BOWL THREAD SIZE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="bowl_thread_size"/>
+        </record>
+        <record id="bowl_thread_line" model="rvd.product.alias.line">
+            <field name="name">BOWL THREAD</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="bowl_thread_size"/>
+        </record>
+
+        <record id="set_number" model="rvd.product.alias">
+            <field name="name">SET NUMBER</field>
+        </record>
+        <record id="set_line" model="rvd.product.alias.line">
+            <field name="name">SET</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="set_number"/>
+        </record>
+
+        <record id="hydraulic_filter" model="rvd.product.alias">
+            <field name="name">HYDRAULIC FILTER</field>
+        </record>
+        <record id="hydraulic_oil_filter_line" model="rvd.product.alias.line">
+            <field name="name">HYDRAULIC OIL FILTER</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="hydraulic_filter"/>
+        </record>
+        <record id="hydraulic_filter_line" model="rvd.product.alias.line">
+            <field name="name">HYDRAULIC FILTER</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="hydraulic_filter"/>
+        </record>
+        <record id="oil_filter_line" model="rvd.product.alias.line">
+            <field name="name">OIL FILTER</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="hydraulic_filter"/>
+        </record>
+
+        <record id="oil_filter" model="rvd.product.alias">
+            <field name="name">OIL FILTER</field>
+        </record>
+        <record id="lube_filter_line" model="rvd.product.alias.line">
+            <field name="name">LUBE FILTER</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="oil_filter"/>
+        </record>
+        <record id="lube_line" model="rvd.product.alias.line">
+            <field name="name">LUBE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="oil_filter"/>
+        </record>
+        <record id="oil_filter_line2" model="rvd.product.alias.line">
+            <field name="name">OIL FILTER</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="oil_filter"/>
+        </record>
+
+        <record id="with_drain_nut" model="rvd.product.alias">
+            <field name="name">WITH DRAIN NUT</field>
+        </record>
+        <record id="with_nut_drain_nut_line" model="rvd.product.alias.line">
+            <field name="name">WITH NUT &amp; DRAIN NUT</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_drain_nut"/>
+        </record>
+
+        <record id="without_drain_nut" model="rvd.product.alias">
+            <field name="name">WITHOUT DRAIN NUT</field>
+        </record>
+        <record id="without_nut_drain_nut_line" model="rvd.product.alias.line">
+            <field name="name">WITHOUT NUT &amp; WITHOUT DRAIN NUT</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="without_drain_nut"/>
+        </record>
+
+        <record id="without_sleeve_fin" model="rvd.product.alias">
+            <field name="name">WITHOUT SLEEVE FIN</field>
+        </record>
+
+        <record id="with_sleeve_fin" model="rvd.product.alias">
+            <field name="name">WITH SLEEVE FIN</field>
+        </record>
+        <record id="sleeve_fin_line" model="rvd.product.alias.line">
+            <field name="name">SLEEVE FIN</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_sleeve_fin"/>
+        </record>
+        <record id="with_fins_line" model="rvd.product.alias.line">
+            <field name="name">WITH FINS</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_sleeve_fin"/>
+        </record>
+
+        <record id="without_bowl_clear" model="rvd.product.alias">
+            <field name="name">WITHOUT BOWL CLEAR</field>
+        </record>
+        <record id="bowl_not_include" model="rvd.product.alias.line">
+            <field name="name">BOWL NOT INCLUDE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="without_bowl_clear"/>
+        </record>
+
+        <record id="concave_head" model="rvd.product.alias">
+            <field name="name">CONCAVE HEAD</field>
+        </record>
+        <record id="concave_head_line" model="rvd.product.alias.line">
+            <field name="name">CONCAVE HEAD</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="concave_head"/>
+        </record>
+
+        <record id="with_drain_plug" model="rvd.product.alias">
+            <field name="name">WITH DRAIN PLUG</field>
+        </record>
+        <record id="with_drain_plug_line" model="rvd.product.alias.line">
+            <field name="name">WITH DRAIN PLUG</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_drain_plug"/>
+        </record>
+
+        <record id="without_gasket" model="rvd.product.alias">
+            <field name="name">WITHOUT GASKET</field>
+        </record>
+        <record id="without_gasket_line" model="rvd.product.alias.line">
+            <field name="name">WITHOUT GASKET</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="without_gasket"/>
+        </record>
+
+        <record id="with_carbon" model="rvd.product.alias">
+            <field name="name">WITH CARBON</field>
+        </record>
+        <record id="with_carbon_line" model="rvd.product.alias.line">
+            <field name="name">WITH CARBON</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_carbon"/>
+        </record>
+
+        <record id="without_drain_plug" model="rvd.product.alias">
+            <field name="name">WITHOUT DRAIN PLUG</field>
+        </record>
+        <record id="without_drain_plug_line" model="rvd.product.alias.line">
+            <field name="name">WITHOUT DRAIN PLUG</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="without_drain_plug"/>
+        </record>
+
+        <record id="with_grip_model" model="rvd.product.alias">
+            <field name="name">WITH GRIP MODEL</field>
+        </record>
+        <record id="with_grip_model_line" model="rvd.product.alias.line">
+            <field name="name">WITH GRIP</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_grip_model"/>
+        </record>
+
+        <record id="without_alumunium_casting" model="rvd.product.alias">
+            <field name="name">WITH ALUMUNIUM CASTING</field>
+        </record>
+        <record id="without_alumunium_casting_line" model="rvd.product.alias.line">
+            <field name="name">WITH ALUMUNIUM CASTING</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="without_alumunium_casting"/>
+        </record>
+
+        <record id="full_flow" model="rvd.product.alias">
+            <field name="name">FULL FLOW</field>
+        </record>
+        <record id="full_flow_syntetic_media_line" model="rvd.product.alias.line">
+            <field name="name">FULL FLOW SYNTETIC MEDIA</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="full_flow"/>
+        </record>
+        <record id="full_flow_celulose_media_line" model="rvd.product.alias.line">
+            <field name="name">FULL FLOW CELULOSE MEDIA</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="full_flow"/>
+        </record>
+        <record id="with_fber_macromedia_line" model="rvd.product.alias.line">
+            <field name="name">WITH FIBER MACROMEDIA</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="full_flow"/>
+        </record>
+        <record id="full_flow_long_life_line" model="rvd.product.alias.line">
+            <field name="name">FULL FLOW LONG LIFE</field>
+            <field name="sequence">4</field>
+            <field name="product_alias_id" ref="full_flow"/>
+        </record>
+        <record id="full_flow_line" model="rvd.product.alias.line">
+            <field name="name">FULL-FLOW</field>
+            <field name="sequence">5</field>
+            <field name="product_alias_id" ref="full_flow"/>
+        </record>
+
+        <record id="eco_high_efficiency" model="rvd.product.alias">
+            <field name="name">ECO HIGH EFFICIENCY</field>
+        </record>
+        <record id="full_flow_eco_bypass_line" model="rvd.product.alias.line">
+            <field name="name">FULL FLOW, ECO &amp; ECO &amp; BYPASS ECO</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="eco_high_efficiency"/>
+        </record>
+        <record id="primary_eco_high_line" model="rvd.product.alias.line">
+            <field name="name">PRIMARY ECO HIGH EFFICIENCY MAIN, HIGH EFFICIENCY</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="eco_high_efficiency"/>
+        </record>
+
+        <record id="seperator_catridge" model="rvd.product.alias">
+            <field name="name">SEPARATOR CATRIDGE</field>
+        </record>
+
+        <record id="plastic_framed" model="rvd.product.alias">
+            <field name="name">PLASTIC FRAMED</field>
+        </record>
+        <record id="plastic_framed_charcoal_line" model="rvd.product.alias.line">
+            <field name="name">PLASTIC FRAMED WITH ACTIVED CHARCOAL</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="plastic_framed"/>
+        </record>
+
+        <record id="seamless" model="rvd.product.alias">
+            <field name="name">SEAMLESS</field>
+        </record>
+        <record id="combination_seamless" model="rvd.product.alias.line">
+            <field name="name">COMBINATION SEAMLESS</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="seamless"/>
+        </record>
+        <record id="alumunium_casting_seat" model="rvd.product.alias.line">
+            <field name="name">ALUMUNIUM CASTING SEAT</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="seamless"/>
+        </record>
+
+        <record id="metal_end_cap" model="rvd.product.alias">
+            <field name="name">METAL END CAP</field>
+        </record>
+        <record id="metal_end_cap_line1" model="rvd.product.alias.line">
+            <field name="name">METAL END CAP 30 MICRON</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="metal_end_cap"/>
+        </record>
+        <record id="metal_end_cap_line2" model="rvd.product.alias.line">
+            <field name="name">METAL END CAP FULLFLOW</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="metal_end_cap"/>
+        </record>
+        <record id="metal_end_cap_line3" model="rvd.product.alias.line">
+            <field name="name">METAL END CAP WITH SYNTHETIC MEDIA</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="metal_end_cap"/>
+        </record>
+        <record id="metal_end_cap_line4" model="rvd.product.alias.line">
+            <field name="name">METAL END CAP WITH CELULOSE MEDIA</field>
+            <field name="sequence">4</field>
+            <field name="product_alias_id" ref="metal_end_cap"/>
+        </record>
+        <record id="metal_end_cap_line5" model="rvd.product.alias.line">
+            <field name="name">BYPASS METAL END CAP</field>
+            <field name="sequence">5</field>
+            <field name="product_alias_id" ref="metal_end_cap"/>
+        </record>
+
+
+        <record id="paper_framed" model="rvd.product.alias">
+            <field name="name">PAPER FRAMED</field>
+        </record>
+        <record id="paper_framed_charcoal_line" model="rvd.product.alias.line">
+            <field name="name">PAPER FRAMED WITH ACTIVED CHARCOAL</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="paper_framed"/>
+        </record>
+        <record id="paper_framed_charcoal_line" model="rvd.product.alias.line">
+            <field name="name">PAPER FRAMED NORMAL MEDIA</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="paper_framed"/>
+        </record>
+
+        <record id="can_type" model="rvd.product.alias">
+            <field name="name">CAN TYPE</field>
+        </record>
+        <record id="bypass_can_type_line" model="rvd.product.alias.line">
+            <field name="name">BYPASS CAN TYPE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="can_type"/>
+        </record>
+
+        <record id="with_bowl_clear" model="rvd.product.alias">
+            <field name="name">WITH BOWL CLEAR</field>
+        </record>
+        <record id="bowl_include_line" model="rvd.product.alias.line">
+            <field name="name">BOWL &amp; BOWL INCLUDE</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="with_bowl_clear"/>
+        </record>
+        <record id="bowl_line" model="rvd.product.alias.line">
+            <field name="name">BOWL</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="with_bowl_clear"/>
+        </record>
+
+        <record id="disposable_housing" model="rvd.product.alias">
+            <field name="name">DISPOSABLE HOUSING</field>
+        </record>
+        <record id="air_housing_filter" model="rvd.product.alias.line">
+            <field name="name">AIR HOUSING FILTER</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="disposable_housing"/>
+        </record>
+        <record id="air_filter_duralite" model="rvd.product.alias.line">
+            <field name="name">AIR FILTER DURALITE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="disposable_housing"/>
+        </record>
+        <record id="air_housing_disposable" model="rvd.product.alias.line">
+            <field name="name">AIR HOUSING DISPOSABLE</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="disposable_housing"/>
+        </record>
+
+        <record id="id_2" model="rvd.product.alias">
+            <field name="name">ID 2</field>
+        </record>
+        <record id="bolt_hole_diameter" model="rvd.product.alias.line">
+            <field name="name">BOLT HOLE DIAMETER</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="id_2"/>
+        </record>
+
+        <record id="alternated_part_number" model="rvd.product.alias">
+            <field name="name">ALTERNATED PART NUMBER</field>
+        </record>
+        <record id="upgrade_of" model="rvd.product.alias.line">
+            <field name="name">UPGRADE OF</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="alternated_part_number"/>
+        </record>
+        <record id="for_upgrade_use" model="rvd.product.alias.line">
+            <field name="name">FOR UPGRADE USE</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="alternated_part_number"/>
+        </record>
+        <record id="for_upgrade_use" model="rvd.product.alias.line">
+            <field name="name">IS LONGER VERSION OF</field>
+            <field name="sequence">3</field>
+            <field name="product_alias_id" ref="alternated_part_number"/>
+        </record>
+
+        <record id="related_part_number" model="rvd.product.alias">
+            <field name="name">RELATED PART NUMBER</field>
+        </record>
+        <record id="filter_head_with_ai" model="rvd.product.alias.line">
+            <field name="name">FILTER HEAD WITH ADDITIONAL INFORMATION</field>
+            <field name="sequence">1</field>
+            <field name="product_alias_id" ref="related_part_number"/>
+        </record>
+        <record id="additional_information" model="rvd.product.alias.line">
+            <field name="name">ADDITIONAL INFORMATION</field>
+            <field name="sequence">2</field>
+            <field name="product_alias_id" ref="related_part_number"/>
+        </record>
+
+
+        <!-- PM Service -->
+
+        <record id="250_hours" model="rvd.pm.service">
+            <field name="name">250 Hours</field>
+        </record>
+
+        <record id="500_hours" model="rvd.pm.service">
+            <field name="name">500 Hours</field>
+        </record>
+
+        <record id="1000_hours" model="rvd.pm.service">
+            <field name="name">1000 Hours</field>
+        </record>
+
+        <record id="1500_hours" model="rvd.pm.service">
+            <field name="name">1500 Hours</field>
+        </record>
+
+        <record id="2000_hours" model="rvd.pm.service">
+            <field name="name">2000 Hours</field>
+        </record>
+
+    </data>
+</odoo>
