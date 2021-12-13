@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- On Sale Order form view -->
+        <record id="view_order_min_price_form" model="ir.ui.view">
+            <field name="name">sale.order.min_price.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Button to move on stage waiting -->
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="states">draft,sent,sale,waitingapproval</attribute>
+                </xpath>
+                <!-- We cannot call wizard with action_confirm button, so we hide this button and create a new button instead -->
+                <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!-- Create new button -->
+                <xpath expr="//button[@id='action_confirm']" position="after">
+                    <button name="action_propose" id="action_propose" string="Confirm Sale" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+                    <button name="action_propose" string="Confirm Sale" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_propose" string="Confirm Sale" type="object" attrs="{'invisible': [('state', 'not in', ['waitingapproval'])]}" groups="sales_team.group_sale_manager"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_view_search_min_price" model="ir.ui.view">
+            <field name="name">sale.order.search.min.price</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <!-- Button to search on waitingapproval -->
+                <xpath expr="//filter[@name='sales']" position="before">
+                    <filter string="Waiting Approval" name="waitingapproval" domain="[('state','=','waitingapproval')]"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fal_sale_approval
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-09 02:48+0000\n"
+"PO-Revision-Date: 2018-07-09 10:01+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.0.8\n"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_fal_sale_proposal_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_fal_sale_proposal_wizard
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_order_min_price_form
+msgid "Confirm Sale"
+msgstr "Confirmer la vente"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_fal_sale_proposal_wizard
+msgid "Manager Confirm"
+msgstr "Manager Confirm"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_fal_sale_proposal_wizard
+msgid "Propose"
+msgstr "Proposer"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_fal_sale_proposal_wizard
+msgid "Propose Quotation to manager"
+msgstr "Proposer devis au manager"
+
+#. module: fal_sale_approval
+#: code:addons/fal_sale_approval/models/sale_order.py:35
+#, python-format
+msgid "Propose Quotation?"
+msgstr "Proposer devis?"
+
+#. module: fal_sale_approval
+#: model:ir.model,name:fal_sale_approval.model_sale_order
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: fal_sale_approval
+#: model:ir.model.fields,field_description:fal_sale_approval.field_fal_sale_proposal_wizard_sale_order_id
+msgid "Sale Order"
+msgstr "Bon de commande"
+
+#. module: fal_sale_approval
+#: model:ir.model,name:fal_sale_approval.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.sale_order_view_search_min_price
+msgid "Waiting Approval"
+msgstr "En attente d'approbation"
+
+#. module: fal_sale_approval
+#: model:ir.ui.view,arch_db:fal_sale_approval.view_fal_sale_proposal_wizard
+msgid "You cannot Confirm this quotation. Don't worry, you can:"
+msgstr "Vous ne pouvez pas confirmer ce devis. Ne vous inquiétez pas, vous pouvez:"
+
+#. module: fal_sale_approval
+#: model:ir.model,name:fal_sale_approval.model_fal_sale_proposal_wizard
+msgid "fal.sale.proposal.wizard"
+msgstr "fal.sale.proposal.wizard"
