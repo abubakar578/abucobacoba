@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="choose_product_select_form_simple" model="ir.ui.view">
+            <field name="name">choose.product.select.form.simple</field>
+            <field name="model">choose.product.select</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field
+                            name="choose_line_ids"
+                            mode="tree"
+                            widget="one2many"
+                            delete="0"
+                        >
+                            <tree editable="bottom" delete="0" create="0">
+                                <field name="is_select"/>
+                                <field name="product_id"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string='Confirm' name="applied_customer_select" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_pricelist_item_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="product_brand_id" attrs="{
+                        'invisible':[('applied_on', '!=', '4_brand')],
+                        'required':[('applied_on', '=', '4_brand')]}"
+                        options="{'no_create':1}"/>
+                </xpath>
+                <xpath expr="//field[@name='min_quantity']" position="before">
+                    <field name="is_quota"/>
+                    <field name="quota" attrs="{'invisible':[('is_quota', '=', False)]}"/>
+                    <field name="use_quota" attrs="{'invisible':[('is_quota', '=', False)]}" readonly="1" force_save="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='min_quantity']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('is_quota', '=', True)]}</attribute>
+                </xpath>
+                <!-- change icon minus to plus -->
+                <xpath expr="//group[@name='pricelist_rule_advanced']/div[1]" position="replace">
+                    <div>
+                        <span attrs="{'invisible':[('base', '!=', 'list_price')]}">Sales Price  +  </span>
+                        <span attrs="{'invisible':[('base', '!=', 'standard_price')]}">Cost  +  </span>
+                        <span attrs="{'invisible':[('base', '!=', 'pricelist')]}">Other Pricelist  +  </span>
+                    </div>
+                </xpath>
+
+                <xpath expr="//label[@for='price_discount']" position="attributes">
+                    <attribute name="string">Margin</attribute>
+                </xpath>
+                <!-- add landed cost -->
+                <xpath expr="//label[@for='price_surcharge']" position="before">
+                    <!-- <label string=" + " for="landed_cost"/> -->
+                    <label for="landed_cost"/>
+                    <div class="o_row">
+                        <field name="landed_cost"/>
+                  </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_non_stock_form_simple" model="ir.ui.view">
+            <field name="name">product.non.stock.form.simple</field>
+            <field name="model">product.non.stock</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field
+                            name="non_stock_line_ids"
+                            mode="tree"
+                            widget="one2many"
+                            delete="0"
+                        >
+                            <tree editable="bottom" delete="0">
+                                <field name="product_id"/>
+                                <field name="product_char"/>
+                                <field name="vendor_id"/>
+                                <field name="price"/>
+                                <field name="quantity" />
+                                <field name="uom_id"/>
+                                <!-- <button name="unlink" icon="fa-trash-o" type="object" confirm="You sure delete this record?"/> -->
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string='Confirm' name="create_so_line" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

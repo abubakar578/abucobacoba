@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_result_product_form" model="ir.ui.view">
+            <field name="name">result.product.form</field>
+            <field name="model">result.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="rvd_sku" readonly="1" attrs="{'invisible': ['|', ('is_attribute', '=', True), ('rvd_equipment_ids', '!=', [])]}"/>
+                                <field name="is_attribute" invisible="1"/>
+                                <field name="section_name" invisible="1"/>
+                                <field name="request_qty"/>
+                            </group>
+                            <group>
+                                <field name="ritma_code_ids" widget="many2many_tags" readonly="True" invisible="1"/>
+                                <field name="rvd_equipment_ids" attrs="{'invisible': ['|', ('is_attribute', '=', True), ('rvd_sku', '!=', False)], 'readonly': [('rvd_sku', '!=', 0)]}" force_save="1" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <!-- <group> -->
+                        <field name="rvd_product_sku_ids" force_save="1" mode="tree">
+                            <tree create="false" editable="bottom" delete="0" limit="10">
+                                <field name="reserve" string="Request" />
+                                <field name="product_tmpl_id" readonly="True" />
+                                <field name="ritma_code_id" readonly="True" />
+                                <field name="order_id" invisible="1"/>
+                                <!-- <field name="is_attribute"/> -->
+<!--                                 <field name="height" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="height2_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="od_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="od2_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="id_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="id2_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="flange_hat" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="length_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="length2_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="width_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="width2_id" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="thread" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="litre" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="ampere" attrs="{'invisible':[('is_attribute', '=', True)]}"/> -->
+                                <field name="price" readonly="True"/>
+                                <field name="brand_id" readonly="True"/>
+                                <field name="description" readonly="True" />
+                                <field name="desc_stock" readonly="1"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string='Percepatan' name="create_order_line_percepatan" type="object" class="oe_highlight"/>
+                        <button string='Confirm' name="create_order_line_direct" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_result_product_form_attribute" model="ir.ui.view">
+            <field name="name">result.product.form</field>
+            <field name="model">result.product</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="rvd_sku" readonly="1" attrs="{'invisible': ['|', ('is_attribute', '=', True), ('rvd_equipment_ids', '!=', [])]}"/>
+                                <field name="is_attribute" invisible="1"/>
+                                <field name="section_name" invisible="1"/>
+                                <field name="request_qty"/>
+                            </group>
+                            <group>
+                                <field name="ritma_code_ids" widget="many2many_tags" readonly="True" invisible="1"/>
+                                <field name="rvd_equipment_ids" attrs="{'invisible': ['|', ('is_attribute', '=', True), ('rvd_sku', '!=', False)], 'readonly': [('rvd_sku', '!=', 0)]}" force_save="1" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <!-- <group> -->
+                        <field name="rvd_product_sku_ids" force_save="1" mode="tree">
+                            <tree create="false" editable="bottom" delete="0" limit="10">
+                                <field name="reserve" string="Request" />
+                                <field name="product_tmpl_id" readonly="True" />
+                                <field name="ritma_code_id" readonly="True" />
+                                <field name="order_id" invisible="1"/>
+                                <field name="is_attribute" invisible="1"/>
+                                <field name="height" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="height2" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="od1" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="od2" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="id1" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="id2" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="flange_hat" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="length" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="length2" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="width" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="width2" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="thread" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="litre" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="ampere" attrs="{'invisible':[('is_attribute', '!=', True)]}"/>
+                                <field name="price" readonly="True"/>
+                                <field name="brand_id" readonly="True"/>
+                                <field name="description" readonly="True" />
+                                <field name="desc_stock" readonly="1"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string='Percepatan' name="create_order_line_percepatan" type="object" class="oe_highlight"/>
+                        <button string='Confirm' name="create_order_line_direct" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

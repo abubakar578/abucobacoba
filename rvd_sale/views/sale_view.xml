@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_order_form_inherit_rivindi" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">CSS</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="states">draft,sent,sale,waitingapproval</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='other_information']/group/group[@name='sales_person']/field[@name='client_order_ref']" position="attributes">
+                    <attribute name="string">PO Customer Number</attribute>
+                </xpath>
+                <!-- We cannot call wizard with action_confirm button, so we hide this button and create a new button instead -->
+                <!-- <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath> -->
+                <!-- Create new button -->
+               <!--  <xpath expr="//button[@id='action_confirm']" position="after">
+                    <button name="action_propose" id="action_propose" string="Confirm Sale" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+                    <button name="action_propose" string="Confirm Sale" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_propose" string="Confirm Sale" type="object" attrs="{'invisible': [('state', 'not in', ['waitingapproval'])]}" groups="sales_team.group_sale_manager"/>
+                </xpath> -->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                    <attribute name="widget">so_description_page</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="rvd_merk"/>
+                    <field name="percentage" invisible="1"/>
+                    <field name="done_add_ship" invisible="1"/>
+                    <field name="total_shipping" invisible="1"/>
+                    <field name="total_weight" invisible="1"/>
+                    <field name="total_volume" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                    <button name="action_open_internal_shipping" type="object" icon="fa-arrow-right" attrs="{'invisible': [('route_id', '=', False)]}"/>
+                    <field name="rvd_kode_customer"/>
+                    <field name="remarks" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="prior_brand_ids" widget="many2many_tags" force_save="1"/>
+                    <field name="po_file" filename="file_po_file_name"/>
+                    <field name="file_po_file_name" invisible="1"/>
+                    <field name="po_second_file" filename="file_po_second_file_name"/>
+                    <field name="file_po_second_file_name" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                    <field name="harga_satuan"/>
+                    <field name="harga_pengajuan"/>
+                    <field name="harga_markup" string="Harga Negosiator"/>
+                    <field name="harga_non_stock"/>
+                    <field name="ket_stock" optional="hide"/>
+                    <field name="reason" optional="hide"/>
+                </xpath>
+                <xpath expr="//page[@name='order_lines']" position="before">
+                    <page string="Customer Enquiry" name="enquiry_ids">
+                        <field
+                            name="enquiry_ids"
+                            widget="section_and_note_one2many"
+                            mode="tree"
+                            editable="bottom"
+                            attrs="{'readonly': [('state', '!=', ('draft'))]}"
+                            context="{'default_prior_brand_ids': prior_brand_ids}"
+                        >
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="product_id"/>
+                                        <field name="name" invisible="1"/>
+                                        <field name="rvd_sku"/>
+                                        <field name="brand_id" invisible="1"/>
+                                        <field name="rvd_attribute_ids" widget="many2many_tags"/>
+                                        <field name="rvd_equipment_id"/>
+                                        <field name="prior_brand_ids" widget="many2many_tags"/>
+                                    </group>
+                                    <group>
+                                        <field name="quantity"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <tree editable="bottom">
+                                <field name="product_id" invisible="1"/>
+                                <field name="name" invisible="1"/>
+                                <field name="rvd_sku" attrs="{'readonly': [('rvd_equipment_id', '!=', False)]}"/>
+                                <field name="prior_brand_ids" widget="many2many_tags" invisible="1"/>
+                                <field name="rvd_equipment_id" force_save="1" attrs="{'readonly': [('rvd_sku', '!=', False)]}"/>
+                                <field name="quantity"/>
+                                <field name="with_prio" string="Priority"/>
+                                <!-- attribute -->
+                                <field name="is_attribute" readonly="1" force_save="1"/>
+                                <field name="attr_desc" invisible="1"/>
+                                <field name="attr_model" invisible="1"/>
+                                <field name="attr_detail" invisible="1"/>
+                                <field name="attr_gasket_type" invisible="1"/>
+                                <field name="attr_height_min" invisible="1"/>
+                                <field name="attr_height2_min" invisible="1"/>
+                                <field name="attr_od_min" invisible="1"/>
+                                <field name="attr_od2_min" invisible="1"/>
+                                <field name="attr_id_min" invisible="1"/>
+                                <field name="attr_id2_min" invisible="1"/>
+                                <field name="attr_gasket_od_min" invisible="1"/>
+                                <field name="attr_flange_hat_min" invisible="1"/>
+                                <field name="attr_lenght_min" invisible="1"/>
+                                <field name="attr_lenght2_min" invisible="1"/>
+                                <field name="attr_widht_min" invisible="1"/>
+                                <field name="attr_widht2_min" invisible="1"/>
+                                <field name="attr_litre_min" invisible="1"/>
+                                <field name="attr_ampere_min" invisible="1"/>
+                                <field name="attr_bowl_thread_size_min" invisible="1"/>
+                                <field name="attr_thread_min" invisible="1"/>
+                                <field name="attr_thread_nut_min" invisible="1"/>
+                                <!-- button -->
+                                <button name="search_product" type="object" title="Search Ritma Code" class="fa fa-fw fa-search"/>
+                                <button name="action_add_non_stock" type="object" class="fa fa-plus"/>
+                                <button name="action_open_attrs" type="object" string="Open Attribute" attrs="{'invisible': [('is_attribute', '=', False)]}"/>
+                            </tree>
+                        </field>
+                        <button name="search_by_attr" type="object" title="Search By Attribute" string="Search By Attribute"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_quotation_tree_inherit_rivindi" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="string">CSS</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sale_orderline_check_route" model="ir.ui.view">
+            <field name="name">sale.order.line.form</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field
+                            name="route_warehouse_ids"
+                            widget="one2many"
+                            force_save="1"
+                            readonly="0"
+                        >
+                            <form>
+                                <group>
+                                    <group>
+                                        <field name="delivery_by"/>
+                                        <field name="from_wh_id"/>
+                                        <field name="total_volume" invisible="1"/>
+                                        <field name="total_weight" invisible="1"/>
+                                        <field name="location_id" invisible="1"/>
+                                        <field name="quantity"/>
+                                        <field name="price_unit"/>
+                                    </group>
+                                </group>
+                            </form>
+                            <tree editable="bottom">
+                                <field name="location_id" invisible="1"/>
+                                <field name="delivery_by" force_save="1" domain="[('from_wh', '=', from_wh_id), ('destination_wh', '=', location_id)]"/>
+                                <field name="total_volume" invisible="1"/>
+                                <field name="total_weight" invisible="1"/>
+                                <field name="from_wh_id" readonly="0" force_save="1" domain="[('usage', '=', 'internal')]"/>
+                                <field name="quantity" readonly="1" force_save="1"/>
+                                <field name="price_unit" readonly="1" force_save="1"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                        <button string='Save' name="set_value_harga" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_search_attribute" model="ir.ui.view">
+            <field name="name">customer.enquiry.line.form</field>
+            <field name="model">customer.enquiry.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="is_attribute" invisible="1"/>
+                                <field name="prior_brand_ids" invisible="1"/>
+                                <field name="with_prio" string="With Product Priority"/>
+                                <field name="quantity" string="Request Qty"/>
+                                <field name="attr_desc" />
+                                <field name="attr_model"/>
+                                <field name="attr_detail" string="Product Detail"/>
+                                <field name="attr_gasket_type" />
+                            </group>
+                        </group>
+                        <!-- Attributes -->
+                        <label for="attr_height_min" string="Height"/>
+                        <div class="oe_inline">
+                            <field name="attr_height_min" class="oe_inline" nolabel="1"/> 
+                            <span class="oe_inline">Range :</span>
+                            <field name="attr_height_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_height2_min" string="Height2"/>
+                        <div class="oe_inline">
+                            <field name="attr_height2_min" class="oe_inline" nolabel="1"/> 
+                            <span class="oe_inline">Range :</span>
+                            <field name="attr_height2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_od_min" string="OD"/>
+                        <div>
+                            <field name="attr_od_min" nolabel="1" class="oe_inline"/>
+                            <span class="oe_inline">Range :</span>
+                            <field name="attr_od_max" class="oe_inline" nolabel="1"/>
+                        </div>
+
+                        <label for="attr_od2_min" string="OD2"/>
+                        <div>
+                            <field name="attr_od2_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_od2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_id_min" string="ID"/>
+                        <div>
+                            <field name="attr_id_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_id_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_id2_min" string="ID2"/>
+                        <div>
+                            <field name="attr_id2_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_id2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_gasket_od_min" string="Gasket OD"/>
+                        <div>
+                            <field name="attr_gasket_od_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_gasket_od_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_flange_hat_min" string="Flange Hat"/>
+                        <div>
+                            <field name="attr_flange_hat_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_flange_hat_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_lenght_min" string="Length"/>
+                        <div>
+                            <field name="attr_lenght_min" class="oe_inline" nolabel="1"/>
+                            Range : <field name="attr_lenght_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_lenght2_min" string="Length2"/>
+                        <div>
+                            <field name="attr_lenght2_min" class="oe_inline" nolabel="1"/>
+                            Range : <field name="attr_lenght2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_widht_min" string="Width"/>
+                        <div>
+                            <field name="attr_widht_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_widht_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_widht2_min" string="Width2"/>
+                        <div>
+                            <field name="attr_widht2_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_widht2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_litre_min" string="Litre"/>
+                        <div>
+                            <field name="attr_litre_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_litre_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_ampere_min" string="Ampere"/>
+                        <div>
+                            <field name="attr_ampere_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_ampere_max" nolabel="1" class="oe_inline"/>
+                        </div>
+                        
+                        <label for="attr_bowl_thread_size_min" string="Bowl Thread Size"/>
+                        <div>
+                            <field name="attr_bowl_thread_size_min" class="oe_inline" nolabel="1"/>
+                        </div>
+
+                        <label for="attr_thread_min" string="Thread"/>
+                        <div>
+                            <field name="attr_thread_min" class="oe_inline" nolabel="1"/>
+                        </div>
+
+                        <label for="attr_thread_nut_min" string="Thread Nut"/>
+                        <div>
+                            <field name="attr_thread_nut_min" class="oe_inline" nolabel="1"/>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <!-- <button string='Search' name="search_product" type="object" class="oe_highlight"/> -->
+                        <button string="Save" class="btn-primary" special="save"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_search_attribute_create" model="ir.ui.view">
+            <field name="name">customer.enquiry.line.form</field>
+            <field name="model">customer.enquiry.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="is_attribute" invisible="1"/>
+                                <field name="prior_brand_ids" invisible="1"/>
+                                <field name="with_prio" string="With Product Priority"/>
+                                <field name="quantity" string="Request Qty"/>
+                                <field name="attr_desc" />
+                                <field name="attr_model"/>
+                                <field name="attr_detail" string="Product Detail"/>
+                                <field name="attr_gasket_type" />
+                            </group>
+                        </group>
+                        <!-- Attributes -->
+                        <label for="attr_height_min" string="Height"/>
+                        <div class="oe_inline">
+                            <field name="attr_height_min" class="oe_inline" nolabel="1"/> 
+                            <span class="oe_inline">Range :</span>
+                            <field name="attr_height_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_height2_min" string="Height2"/>
+                        <div class="oe_inline">
+                            <field name="attr_height2_min" class="oe_inline" nolabel="1"/> 
+                            <span class="oe_inline">Range :</span>
+                            <field name="attr_height2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_od_min" string="OD"/>
+                        <div>
+                            <field name="attr_od_min" nolabel="1" class="oe_inline"/>
+                            <span class="oe_inline">Range :</span>
+                            <field name="attr_od_max" class="oe_inline" nolabel="1"/>
+                        </div>
+
+                        <label for="attr_od2_min" string="OD2"/>
+                        <div>
+                            <field name="attr_od2_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_od2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_id_min" string="ID"/>
+                        <div>
+                            <field name="attr_id_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_id_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_id2_min" string="ID2"/>
+                        <div>
+                            <field name="attr_id2_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_id2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_gasket_od_min" string="Gasket OD"/>
+                        <div>
+                            <field name="attr_gasket_od_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_gasket_od_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_flange_hat_min" string="Flange Hat"/>
+                        <div>
+                            <field name="attr_flange_hat_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_flange_hat_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_lenght_min" string="Length"/>
+                        <div>
+                            <field name="attr_lenght_min" class="oe_inline" nolabel="1"/>
+                            Range : <field name="attr_lenght_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_lenght2_min" string="Length2"/>
+                        <div>
+                            <field name="attr_lenght2_min" class="oe_inline" nolabel="1"/>
+                            Range : <field name="attr_lenght2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_widht_min" string="Width"/>
+                        <div>
+                            <field name="attr_widht_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_widht_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_widht2_min" string="Width2"/>
+                        <div>
+                            <field name="attr_widht2_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_widht2_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_litre_min" string="Litre"/>
+                        <div>
+                            <field name="attr_litre_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_litre_max" nolabel="1" class="oe_inline"/>
+                        </div>
+
+                        <label for="attr_ampere_min" string="Ampere"/>
+                        <div>
+                            <field name="attr_ampere_min" class="oe_inline" nolabel="1"/> Range : 
+                            <field name="attr_ampere_max" nolabel="1" class="oe_inline"/>
+                        </div>
+                        
+                        <label for="attr_bowl_thread_size_min" string="Bowl Thread Size"/>
+                        <div>
+                            <field name="attr_bowl_thread_size_min" class="oe_inline" nolabel="1"/>
+                        </div>
+
+                        <label for="attr_thread_min" string="Thread"/>
+                        <div>
+                            <field name="attr_thread_min" class="oe_inline" nolabel="1"/>
+                        </div>
+
+                        <label for="attr_thread_nut_min" string="Thread Nut"/>
+                        <div>
+                            <field name="attr_thread_nut_min" class="oe_inline" nolabel="1"/>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button string='Create' name="create_attrs" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

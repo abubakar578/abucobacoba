@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_customer_enquiry_line,customer.enquiry.line,model_customer_enquiry_line,base.group_user,1,1,1,1
+access_result_product,result.product,model_result_product,base.group_user,1,1,1,1
+access_rvd_stock_product,rvd.stock.product,model_rvd_stock_product,base.group_user,1,1,1,1
+access_rvd_product_sku,rvd.product.sku,model_rvd_product_sku,base.group_user,1,1,1,1
+access_temporary_order,temporary.order,model_temporary_order,base.group_user,1,1,1,1
+access_choose_internal_shipping,choose.internal.shipping,model_choose_internal_shipping,base.group_user,1,1,1,1
+access_choose_product_select,choose.product.select,model_choose_product_select,base.group_user,1,1,1,1
+access_choose_product_select_line,choose.product.select.line,model_choose_product_select_line,base.group_user,1,1,1,1
+access_ritma_shipping_cost,ritma.shipping.cost,model_ritma_shipping_cost,base.group_user,1,1,1,1
+access_route_warehouse,route.warehouse,model_route_warehouse,base.group_user,1,1,1,1
+access_product_non_stock,product.non.stock,model_product_non_stock,base.group_user,1,1,1,1
+access_product_non_stock_line,product.non.stock.line,model_product_non_stock_line,base.group_user,1,1,1,1
