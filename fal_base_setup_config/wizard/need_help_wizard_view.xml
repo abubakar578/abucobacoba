@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="need_help_view_wizard" model="ir.ui.view">
+            <field name="name">cluedoo.help.wizard</field>
+            <field name="model">cluedoo.help.wizard</field>
+            <field name="arch" type="xml">
+                <form string="CLuedoo Help">
+                    <group string="Company Information">
+                        <field name="company_name" required="1"/>
+                        <field name="email_from" required="1"/>
+                        <field name="phone"/>
+                        <field name="address"/>
+                    </group>
+                    <footer>
+                        <button name="button_send" string="Send" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_need_help" model="ir.actions.act_window">
+            <field name="name">Send Support Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cluedoo.help.wizard</field>
+            <field name="view_id" ref="need_help_view_wizard"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
