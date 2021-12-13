@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fal_partner_credit_limit
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-09 04:55+0000\n"
+"PO-Revision-Date: 2018-07-12 11:14+0700\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+"X-Generator: Poedit 2.0.8\n"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_res_partner_fal_sale_allowed_aged
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_res_users_fal_sale_allowed_aged
+#: model:ir.ui.view,arch_db:fal_partner_credit_limit.view_partner_form
+msgid "Allowed Aged"
+msgstr "Age autorisé"
+
+#. module: fal_partner_credit_limit
+#: model:ir.ui.view,arch_db:fal_partner_credit_limit.view_fal_sale_proposal_wizard_credit_limit
+msgid "Available credit is not enough. Please contact sales manager or Propose to Apporval."
+msgstr "Le crédit disponible n'est pas suffisant. S'il vous plaît contacter le manager des ventes ou Proposer à l'approbation."
+
+#. module: fal_partner_credit_limit
+#: selection:res.partner,fal_sale_warning_type:0
+msgid "Block"
+msgstr "Bloqué"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model,name:fal_partner_credit_limit.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: fal_partner_credit_limit
+#: model:ir.ui.view,arch_db:fal_partner_credit_limit.view_partner_form
+msgid "Credit Limit"
+msgstr "Limite de crédit"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model.fields,help:fal_partner_credit_limit.field_res_partner_fal_sale_allowed_aged
+#: model:ir.model.fields,help:fal_partner_credit_limit.field_res_users_fal_sale_allowed_aged
+msgid "Maximum invoice age in days"
+msgstr "Age maximal de la facture en jours"
+
+#. module: fal_partner_credit_limit
+#: selection:res.partner,fal_sale_warning_type:0
+msgid "None"
+msgstr "Aucun"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model,name:fal_partner_credit_limit.model_sale_order
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_res_partner_fal_sale_warning_type
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_res_users_fal_sale_warning_type
+msgid "Sale Restriction"
+msgstr "Restriction de vente"
+
+#. module: fal_partner_credit_limit
+#: model:ir.ui.view,arch_db:fal_partner_credit_limit.view_fal_sale_proposal_wizard_credit_limit
+msgid "This partner has an old unpaid invoice(s). Please contact sales manager or Propose to Approval."
+msgstr "Ce partenaire a une ancienne facture impayé. S'il vous plait contacter le manager des ventes ou Proposer à l'approbation."
+
+#. module: fal_partner_credit_limit
+#: model:ir.ui.view,arch_db:fal_partner_credit_limit.view_fal_sale_proposal_wizard_credit_limit
+msgid "This partner is not allowed for Sale order. Please contact sales manager or Propose to Approval."
+msgstr "Ce partenaire n'est pas autorisé pour le bon de commande. S'il vous plait contacter le manager des ventes ou Proposer à l'approbation."
+
+#. module: fal_partner_credit_limit
+#: selection:res.partner,fal_sale_warning_type:0
+msgid "Value"
+msgstr "Valeur"
+
+#. module: fal_partner_credit_limit
+#: selection:res.partner,fal_sale_warning_type:0
+msgid "Value And Date"
+msgstr "Valeur et Date"
+
+#. module: fal_partner_credit_limit
+#: model:ir.ui.view,arch_db:fal_partner_credit_limit.view_partner_form
+msgid "days"
+msgstr "jours"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model,name:fal_partner_credit_limit.model_fal_sale_proposal_wizard
+msgid "fal.sale.proposal.wizard"
+msgstr "fal.sale.proposal.wizard"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_fal_sale_proposal_wizard_is_blocked
+msgid "is_blocked"
+msgstr "is_blocked"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_fal_sale_proposal_wizard_is_over_credit
+msgid "is_over_credit"
+msgstr "is_over_credit"
+
+#. module: fal_partner_credit_limit
+#: model:ir.model.fields,field_description:fal_partner_credit_limit.field_fal_sale_proposal_wizard_unpaid_invoice
+msgid "unpaid invoices"
+msgstr "unpaid invoices"

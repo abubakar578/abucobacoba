@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_fal_sale_proposal_wizard_credit_limit" model="ir.ui.view">
+            <field name="name">fal.sale.proposal.wizard.form.credit.limit</field>
+            <field name="model">fal.sale.proposal.wizard</field>
+            <field name="inherit_id" ref="fal_sale_approval.view_fal_sale_proposal_wizard"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//p/ul" position="inside" >
+                    <li attrs="{'invisible': [('is_blocked', '=', False)]}">
+                        This partner is not allowed for Sale order. Please contact sales manager or Propose to Approval.
+                    </li>
+                    <li attrs="{'invisible': [('is_over_credit', '=', False)]}">
+                        Available credit is not enough. Please contact sales manager or Propose to Apporval.
+                    </li>
+                    <li attrs="{'invisible': [('unpaid_invoice', '=', False)]}">
+                        This partner has an old unpaid invoice(s). Please contact sales manager or Propose to Approval.
+                    </li>
+                    <field name="is_blocked" invisible="1"/>
+                    <field name="is_over_credit" invisible="1"/>
+                    <field name="unpaid_invoice" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

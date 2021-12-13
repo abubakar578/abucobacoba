@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='purchase']" position="after">
+                    <group string="Credit Limit">
+                        <field name="fal_sale_warning_type" force_save="1" attrs="{'readonly':[('can_edit_form', '=', False)]}"/>
+                        <field name="credit_limit" widget="monetary" attrs="{'invisible': [('fal_sale_warning_type', 'not in', ('value', 'valuedate'))], 'readonly':[('can_edit_form', '=', False)]}"/>
+                        <div attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}" colspan="2">
+                            <span>
+                                Date has some level:
+                                <br/>
+                                1. position 0: if total receivable &lt; 0, but oldest invoice age is &lt;= 0 days
+                                <br/>
+                                2. position 1: if total receivable &lt; 0 and the oldest invoice age is 1 - 30 days
+                                <br/>
+                                3. position 2: if total receivable &lt; 0 and the oldest invoice age is 31 - 60 days
+                                <br/>
+                                4. position 3: if total receivable &lt; 0 and the oldest invoice age is 61 - 90 days
+                                <br/>
+                                5. position 4: if total receivable &lt; 0 and the oldest invoice age is &gt; 90 days
+                            </span>
+                        </div>
+                        <field name="fal_deptor_position" string="Current Position" attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}"/>
+                        <field name="fal_block_level" attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])], 'readonly': 1}"/>
+                        <field name="fal_oldest_invoice_no" attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_form_manager_sale" model="ir.ui.view">
+            <field name="name">res.partner.form.manager.sale</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="fal_partner_credit_limit.view_partner_form"/>
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager')), (4, ref('account.group_account_manager'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fal_sale_warning_type']" position="attributes">
+                    <attribute name="attrs">{'readonly': 0}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='credit_limit']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('fal_sale_warning_type', 'not in', ('value', 'valuedate'))], 'readonly': 0}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='fal_block_level']" position="attributes">
+                    <attribute name="attrs">{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])], 'readonly': 0}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fal_customer_debtor_followup_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+               <tree>
+                    <field name="name"/>
+                    <field name="credit_limit" widget="monetary"/>
+                    <field name="credit" widget="monetary"/>
+                    <field name="fal_remaining_credit_limit" widget="monetary"/>
+                    <field name="fal_oldest_invoice_no"/>
+                    <field name="fal_oldest_invoice_age"/>
+                    <field name="fal_deptor_position"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="fal_customer_debtor_followup_action" model="ir.actions.act_window">
+            <field name="name">Customer Debtor Follow Up</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'tree_view_ref': 'fal_partner_credit_limit.fal_customer_debtor_followup_tree'}</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('credit', '>', 0)]</field>
+            <field name="help" type="xml">
+                <p class="oe_view_nocontent_create">
+                    Click to record a new partner
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="fal_customer_debtor_followup" name="Customer Debtor Follow Up" parent="account.menu_finance_receivables"
+            action="fal_customer_debtor_followup_action"/>
+    </data>
+</odoo>

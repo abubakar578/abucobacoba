@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_fal_alert_wizard" model="ir.ui.view">
+            <field name="name">fal.alert.wizard.form</field>
+            <field name="model">fal.alert.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Alert">
+                    <p>
+                        <field name="message"/>
+                    </p>
+                    <field name="sale_order_id" invisible="1"/>
+                    <footer>
+                        <button name="action_sale_propose" string="Confirm" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
