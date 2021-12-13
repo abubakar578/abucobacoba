@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Res.Partner -->
+        <record id="view_partner_form_fal" model="ir.ui.view">
+            <field name="name">res.partner.form.fal</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//notebook" position="inside">
+                        <page name="meeting" string="Meeting" groups="fal_calendar_meeting_ext.group_calendar_user">
+                            <group>
+                                <field name="fal_meeting_category"/>
+                                <field name="fal_standard_rates" domain="[('fal_partner_meeting_category', '=', fal_meeting_category)]" groups="account.group_account_manager" />
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!--Standard Rates -->
+        <record id="view_fal_meeting_standard_rates_form" model="ir.ui.view">
+            <field name="name">view.fal.meeting.standard.rates.form</field>
+            <field name="model">fal.meeting.standard.rates</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="fal_partner_meeting_category"/>
+                        <field name="rates" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="currency_id" groups="base.group_multi_currency"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fal_meeting_standard_rates_tree" model="ir.ui.view">
+            <field name="name">view.fal.meeting.standard.rates.tree</field>
+            <field name="model">fal.meeting.standard.rates</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="fal_partner_meeting_category"/>
+                    <field name="rates" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_view_fal_meeting_standard_rates" model="ir.actions.act_window">
+            <field name="name">Standard Rates</field>
+            <field name="res_model">fal.meeting.standard.rates</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a standard rates.
+              </p><p>
+                Standard rates are attributes for partner and used in meeting management.
+              </p>
+            </field>
+        </record>
+    </data>
+</odoo>

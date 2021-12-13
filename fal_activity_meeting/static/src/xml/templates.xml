@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="button_template_meeting" xml:space="preserve">
+    <t t-inherit="mail.Activity" t-inherit-mode="extension">
+        <xpath expr="//*[hasclass('o_Activity_tools')]/t[1]" position="replace">
+            <t t-if="activity.category == 'meeting'">
+                <button class="o_Activity_toolButton o_activity_create_meeting btn btn-link" t-on-click="_onCreateMeeting"><i class="fa fa-check"/> Mark as Done
+                </button>
+            </t>
+        </xpath>
+    </t>
+    <t t-inherit="mail.activities-list-group-item" t-inherit-mode="extension">
+        <xpath expr="//li/div[2]" position="replace">
+            <t t-if="log.activity_category === 'upload_file'">
+                <a  t-att-data-force-next-activity="log.force_next"
+                    t-att-data-previous-activity-type-id="log.activity_type_id[0]"
+                    t-att-data-activity-id="log.id"
+                    class="o_mark_as_done_upload_file o_activity_link o_activity_link_kanban fa fa-upload"
+                    title="Upload file" role="img" t-att-data-fileupload-id="log.fileuploadID"/>
+                    <span class="d-none">
+                        <t t-call="HiddenInputFile">
+                            <t t-set="fileupload_id" t-value="log.fileuploadID"/>
+                            <t t-set="fileupload_action" t-translation="off">/web/binary/upload_attachment</t>
+                            <input type="hidden" name="model" t-att-value="log.res_model"/>
+                            <input type="hidden" name="id" t-att-value="log.res_id"/>
+                        </t>
+                    </span>
+            </t>
+            <t t-else="">
+            </t>
+        </xpath>
+    </t>
+</templates>
+    

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_lead_rivindi_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="groups">rvd_crm.rivindi_crm_sales_department_no_member</attribute>
+                </xpath>
+                <xpath expr="//field[@name='stage_id']" position="attributes">
+                    <!-- <attribute name="disable_drag_drop_record">True</attribute> -->
+                    <attribute name="readonly">True</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="after">
+                    <button name="action_to_lost_sales" string="Mark Lost"
+                        type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|','|', '|', ('active','=',False), ('probability', '=', 100), ('type', '=', 'lead'), ('rvd_req_lots', '=', False)]}"
+                        groups='sales_team.group_sale_manager'
+                        invisible="1"
+                    />
+                </xpath>
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="before">
+                    <button name="mark_as_read" string="Mark as Read"
+                        type="object" class="oe_highlight"
+                        groups='rvd_crm.group_no_member'
+                        invisible="1"
+                    />
+                </xpath>
+                <!-- Can Edit Start Here-->
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='probability']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email_from']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='phone']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_deadline']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='priority']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']/field[@name='description']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group[1]/field[@name='partner_name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group[1]/div[@class='o_address_format']/field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group[1]/div[@class='o_address_format']/field[@name='street2']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group/div[@class='o_address_format']/field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group/div[@class='o_address_format']/field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group/div[@class='o_address_format']/field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group/div[@class='o_address_format']/field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group[1]/field[@name='website']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group[1]/field[@name='lang_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[@class='mt48']/div[@class='o_row']/field[@name='contact_name']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[@class='mt48']/div[@class='o_row']/field[@name='title']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[@class='mt48']/field[@name='function']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[@class='mt48']/div[@class='o_row o_row_readonly']/field[@name='mobile']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[@name='Misc']/field[@name='referred']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[3]/field[@name='campaign_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)],'invisible': [('type', '=', 'lead')]}</attribute>
+                </xpath>
+                <xpath expr="//group[3]/field[@name='medium_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//group[3]/field[@name='source_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_form', '=', False)]}</attribute>
+                </xpath>
+                <!-- End Here -->
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="before">
+                    <field name="rvd_customer_by" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="rvd_crm_status" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                    <field name="can_edit_form" invisible= '1'/>
+                    <field name="is_done_reply" invisible= '1'/>
+                    <field name="enquiry_file" filename="file_name_enquiry" groups="rvd_crm.group_sales_person" readonly="1"/>
+                    <field name="file_name_enquiry" invisible="1" groups="rvd_crm.group_sales_person" readonly="1"/>
+                    <field name="enquiry_file" filename="file_name_enquiry" groups="rvd_crm.group_no_member"/>
+                    <field name="file_name_enquiry" invisible="1" groups="rvd_crm.group_no_member"/>
+                    <field name="rvd_invoice" invisible="1"/>
+                </xpath>
+                <xpath expr="//sheet/widget[1]" position="replace">
+                    <widget name="web_ribbon" title=" " bg_color="bg-danger" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="sales_admin_id" widget="many2one_avatar_user" string="CSS" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                    <field name="is_read" invisible="1"/>
+                    <field name="is_draft" invisible="1"/>
+                    <field name="is_quotation" invisible="1"/>
+                </xpath>
+                <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', '|', ('type', '=', 'lead'),('active', '=', False),('probability', '&lt;', 100), ('rvd_req_lots', '=', True)]}</attribute>
+                    <attribute name="groups">rvd_crm.group_no_member</attribute>
+                </xpath>
+                <xpath expr="//page[@name='lead']/group/group[1]" position="after">
+                    <group>
+                        <field name="rvd_req_lots" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                    </group>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="before">
+                    <page string="Customer Enquiry" name="enquiry_ids" groups="rvd_crm.group_no_member">
+                       <field
+                            name="enquiry_ids"
+                            widget="section_and_note_one2many"
+                            mode="tree"
+                            editable="bottom"
+                        >
+                            <form>
+                                <group>
+                                    <field name="rvd_sku"/>
+                                    <field name="rvd_equipment_id"/>
+                                    <field name="quantity"/>
+                                </group>
+                            </form>
+                            <tree editable="bottom">
+                                <field name="create_date"/>
+                                <field name="rvd_sku" attrs="{'readonly': [('rvd_equipment_id', '!=', False)]}"/>
+                                <field name="rvd_equipment_id" force_save="1" attrs="{'readonly': [('rvd_sku', '!=', False)]}"/>
+                                <field name="quantity"/>
+                                <field name="with_prio" string="Priority"/>
+                                <field name="is_attribute" readonly="1" />
+                                <button name="action_open_attrs" type="object" string="Open Attribute" attrs="{'invisible': [('is_attribute', '=', False)]}"/>
+                            </tree>
+                        </field>
+                        <button name="search_by_attr" type="object" title="Search By Attribute" string="Search By Attribute"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_crm_lead_kanban_rivindi" model="ir.ui.view">
+            <field name="name">crm.lead.kanban.inherit.rivindi</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="records_draggable">0</attribute>
+                    <attribute name="quick_create">false</attribute>
+                </xpath>
+                <xpath expr="//templates/t/div/div/div" position="after">
+                    <field name="id"/>
+                </xpath>
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="disable_drag_drop_record">true</attribute>
+                </xpath>
+             </field>
+        </record>
+
+        <record id="crm_case_tree_view_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.tree.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Opportunities" create="0">
+                    <field name="name" string="Opportunity" readonly="1"/>
+                    <field name="contact_name" optional="show"/>
+                    <field name="rvd_done_lost" invisible="1"/>
+                    <field name="user_id" widget="many2one_avatar_user" optional="show" domain="[('share', '=', False)]"/>
+                    <field name="team_id" optional="show"/>
+                    <field name="lost_reason" optional="show"/>
+                    <field name="stage_id" optional="show" decoration-bf="1"/>
+                    <button name="action_to_lost_sales" string="Mark Lost" type="object" class="oe_highlight" attrs="{'invisible': [('rvd_done_lost', '=', True)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="crm_case_form_view_oppor_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.oppor.inherited.crm</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_sale_quotations_new']" position="attributes">
+                    <attribute name="groups">rvd_crm.group_no_member</attribute>
+                    <attribute name="attrs">{'invisible': ['|', '|', ('type', '=', 'lead'), ('enquiry_ids', '=', []), ('is_quotation', '=', False), '&amp;', ('active', '=', False)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pending_status_crm">
+            <field name="name">Lost Request</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('crm_case_tree_view_inherit')})]"/>
+            <field name="search_view_id" ref="crm.view_crm_case_leads_filter"/>
+            <field name="domain">[('rvd_req_lots', '=', True)]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_empty_folder">
+                No Provision
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_request_lost_crm" name="Lost Request" sequence="10" action="action_pending_status_crm" parent="crm.crm_menu_report"/>
+
+        <!-- Team -->
+        <record id="visionet_crm_team_view_form" model="ir.ui.view">
+            <field name="name">visionet.crm.team.view.form</field>
+            <field name="model">crm.team</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+                <field name="arch" type="xml">
+                    <xpath expr="//group[@name='right']" position='inside'>
+                        <field name="type_sales"/>
+                        <field name="parent_id" domain="[('type_sales', '=', type_sales)]"/>
+                    </xpath>
+                    <xpath expr="//div[@name='options_active']" position='attributes'>
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </field>
+        </record>
+
+        <record id="visionet_crm_team_view_form_page" model="ir.ui.view">
+            <field name="name">visionet.crm.team.view.form.page</field>
+            <field name="model">crm.team</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='member_ids']" position='attributes'>
+                    <attribute name="domain">[('id', 'in', team_member_sales_ids)]</attribute>
+                </xpath>
+                <xpath expr="//notebook/page[@name='members']/field[@name='member_ids']" position='attributes'>
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//notebook/page[@name='members']" position='after'>
+                    <page name="visionet_members" string="Members">
+                        <field name="team_member_ids" widget="many2many" options="{'not_delete': True}">
+                            <kanban quick_create="false" create="true" delete="true">
+                                <field name="id"/>
+                                <field name="name"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click" style="max-width: 200px">
+                                            <div class="o_kanban_record_top">
+                                                <img t-att-src="kanban_image('res.users', 'image_128', record.id.raw_value)" class="oe_avatar oe_kanban_avatar_smallbox o_image_40_cover mb0" alt="Avatar"/>
+                                                <div class="o_kanban_record_headings ml8">
+                                                    <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+                    <page name="sales_members" string="Sales Members" invisible="1">
+                        <field name="team_member_sales_ids" widget="many2many" options="{'not_delete': True}">
+                            <kanban quick_create="false" create="true" delete="true">
+                                <field name="id"/>
+                                <field name="name"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click" style="max-width: 200px">
+                                            <div class="o_kanban_record_top">
+                                                <img t-att-src="kanban_image('res.users', 'image_128', record.id.raw_value)" class="oe_avatar oe_kanban_avatar_smallbox o_image_40_cover mb0" alt="Avatar"/>
+                                                <div class="o_kanban_record_headings ml8">
+                                                    <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm_stage_form_inherit_ritma" model="ir.ui.view">
+            <field name="name">crm.stage.form</field>
+            <field name="model">crm.stage</field>
+            <field name="inherit_id" ref="crm.crm_stage_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group/group" position='after'>
+                    <group>
+                        <field name="use_sales_admin"/>
+                        <field name="use_sales_person"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Menu Calendar -->
+        <record id="action_view_calendar_activity" model="ir.actions.act_window">
+            <field name="name">Activity</field>
+            <field name="res_model">calendar.event</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="view_id" ref="calendar.view_calendar_event_calendar"/>
+            <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Schedule a new meeting
+              </p><p>
+                The calendar is shared between employees and fully integrated with
+                other applications such as the employee leaves or the business
+                opportunities.
+              </p>
+            </field>
+        </record>
+
+        <!-- Relation Sales -->
+        <record id="rvd_relation_sales_form" model="ir.ui.view">
+            <field name="name">rvd.relation.sales.form</field>
+            <field name="model">rvd.relation.sales</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="sales_person"/>
+                                <field name="sales_admin_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="rvd_relation_sales_tree" model="ir.ui.view">
+            <field name="name">rvd.relation.sales.tree</field>
+            <field name="model">rvd.relation.sales</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sales_person"/>
+                    <field name="sales_admin_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_relation_sales_action" model="ir.actions.act_window">
+            <field name="name">Sales Person Relation</field>
+            <field name="res_model">rvd.relation.sales</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_relation_crm"
+            name="Sales Relation"
+            action="view_relation_sales_action"
+            parent="crm.crm_menu_config"
+            groups="sales_team.group_sale_manager"
+            sequence="6"/>
+
+
+        <!-- attribute view -->
+        <!-- <record id="view_search_attribute" model="ir.ui.view">
+            <field name="name">customer.enquiry.line.form</field>
+            <field name="model">customer.enquiry.line</field>
+            <field name="inherit_id" ref="rvd_sale.view_search_attribute" />
+            <field name="arch" type="xml">
+                <xpath expr="//footer/button[@name='search_product']" position='before'>
+                    <field name="is_from_lead" invisible="1"/>
+                    <button string="Confirm" class="btn-primary" special="save" attrs="{'invisible': [('is_from_lead', '!=', True)]}"/>
+                </xpath>
+                <xpath expr="//footer/button[@name='search_product']" position='attributes'>
+                    <attribute name="attrs">{'invisible': [('is_from_lead', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record> -->
+        <record model="ir.actions.act_window" id="crm.crm_lead_action_pipeline">
+            <field name="context">{
+                    'default_type': 'opportunity',
+                }
+            </field>
+        </record>
+
+         <record id="view_crm_case_opportunities_filter" model="ir.ui.view">
+            <field name="name">crm.lead.search.opportunity</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='assigned_to_me']" position="after">
+                    <filter string="My Pipeline" name="assigned_to_css"
+                        domain="[('sales_admin_id', '=', uid)]"
+                        groups="rvd_crm.group_no_member"
+                        help="Opportunities that are assigned to me"/>
+                </xpath>
+                <xpath expr="//filter[@name='assigned_to_me']" position="attributes">
+                    <attribute name="groups">rvd_crm.group_sales_person</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

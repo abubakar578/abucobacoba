@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.hr.meeting</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="fal_calendar_config.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//div[@data-key='fal_calendar_config']" position="inside">
+                        <h2>Email Alias</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <h5>Meeting Email Alias</h5>
+                                <div>
+                                    <div attrs="{'invisible': [('fal_alias_domain', 'in', ['localhost', '', False])]}">
+                                        <p class="text-muted">
+                                            You can setup a generic email alias to create
+                                            meeting with MOM easily.
+                                        </p>
+                                        <field name="alias_prefix" class="oe_inline"/>
+                                        <span>@</span>
+                                        <field name="fal_alias_domain"  class="oe_inline" readonly="1"/>
+                                    </div>
+                                    <div attrs="{'invisible': [('fal_alias_domain', 'not in', ['localhost', '', False])]}">
+                                        <button type="action"
+                                            name="base_setup.action_general_configuration"
+                                            string="Setup your domain alias" class="oe_link"/>
+                                    </div>
+                                </div>
+                                <label for="no_auto_email"/>
+                                <div class="o_setting_left_pane">
+                                    <field name="no_auto_email"/>
+                                </div>
+                            </div>
+                        </div>
+                    </xpath>
+            </field>
+        </record>
+
+        <record id="action_calendar_config_settings" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_id" ref="res_config_settings_view_form"/>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'fal_calendar_config'}</field>
+        </record>
+    </data>
+</odoo>

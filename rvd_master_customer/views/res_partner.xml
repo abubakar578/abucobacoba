@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_partners_form_rivindi" model="ir.ui.view">
+        <field name="name">view.res.partner.form.rivindi</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field eval="1" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[1]" position="before" >
+                <header>
+                    <button name="set_verified" type="object" string="Verified" class="oe_highlight" groups='account.group_account_user'/>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="email_domain" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="attributes">
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="cabang_id"/>
+                <field name="klasifikasi_customer"/>
+                <field name="ref"/>
+                <field name="currency_id"/>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="create_date" string="Joined Date"/>
+                <field name="is_verified" string="Verified" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="extension" string="Extension"/>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='contact_addresses']" position="attributes">
+                <attribute name="autofocus"></attribute>
+            </xpath>
+            <xpath expr="//notebook/page[@name='contact_addresses']" position="before">
+                <page string="General" name="general" autofocus="autofocus">
+                    <group>
+                        <group string="Business" name="business">
+                            <field name="industry_id"/>
+                            <field name="main_address"/>
+                            <field name="delivery_address"/>
+                            <field name="invoices_address"/>
+                        </group>
+                        <group string="Private" name="private">
+                            <field name="phone_1"/>
+                            <field name="phone_2"/>
+                            <field name="phone_3"/>
+                            <field name="fax"/>
+                            <field name="email"/>
+                            <field name="can_edit_form" invisible= '1'/>
+                        </group>
+                        <group string="Sales" name="rvd_sale">
+                            <field name="user_id" domain="[('share', '=', False)]"/>
+                            <field name="sales_admin_id" string="CSS"/>
+                            <field name="team_id" groups="base.group_no_one"/>
+                            <field name="rvd_child_ids" context="{'default_type': 'other'}">
+                                <tree>
+                                    <field name="type" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group col="12">
+                                            <group colspan="5">
+                                                <field name="type" invisible="1"/>
+                                                <field name="name"/>
+                                                <label for="street" string="Address" attrs="{'invisible': [('type','=', 'contact')]}"/>
+                                                <div attrs="{'invisible': [('type','=', 'contact')]}">
+                                                    <div class="o_address_format" name="div_address">
+                                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                                        <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                                    </div>
+                                                </div>
+                                            </group>
+                                            <group colspan="5">
+                                                <field name="phone"/>
+                                                <field name="email"/>
+                                            </group>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </group>
+                        <group string="Bill" name="bill">
+                            <field name="receipt"/>
+                            <field name="receipt_combined"/>
+                            <field name="invoice_by_fax"/>
+                            <field name="invoice_by"/>
+                            <field name="invoice_area"/>
+                            <label for="book" string="Book"/>
+                            <div>
+                                <field name="book" class="oe_inline" nolabel="1"/>  Page : 
+                                <field name="pages" placeholder="Page" nolabel="1" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group string="Prosedur Administrasi" name="adminstrasi">
+                            <field name="tgl_do"/>
+                            <field name="invoice_diterbitkan"/>
+                            <field name="pic_barang"/>
+                            <field name="stamp" string="Materai"/>
+                            <field name="lampiran_tanda_terima"/>
+                            <field name="stampel_rekening_bank"/>
+                            <field name="status_usaha"/>
+                            <field name="jenis_usaha"/>
+                            <field name="tgl_berdiri"/>
+                        </group>
+                       
+                        <!-- <group string="Jumlah Bank" name="bank">
+                            <field name="bank_ids" widget="one2many">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="no_rekening"/>
+                                    <field name="cabang"/>
+                                    <field name="fasilitas"/>
+                                </tree>
+                            </field>
+                        </group> -->
+                    </group>
+                </page>
+                <page string="Eskpedisi" name="ekspedisi">
+                    <group>
+                        <group>
+                            <field name="warehouse_id"/>
+                            <field name="ekspedisi"/>
+                            <field name="follow_up"/>
+                            <field name="pembayaran"/>
+                            <field name="property_delivery_carrier_id"/>
+                        </group>
+                        <field name="shipping_ids" widget="one2many" context="{'default_pembayaran': pembayaran}">
+                            <tree editable="bottom">
+                                <field name="ship_via"/>
+                                <field name="vendor_id"/>
+                                <field name="name" string="Vendor Name"/>
+                                <field name="pembayaran"/>
+                                <field name="country_ids" widget="many2many_tags"/>
+                                <field name="state_ids" widget="many2many_tags"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page[@name='contact_addresses']" position="after">
+                <page string="Pembayaran" name="page_pembayaran">
+                    <group>
+                        <group string="Payment" name="payment">
+                            <field name="payment_term_id" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="option_due_date" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                        </group>
+
+                        <!-- <group> --><!-- tring="Credit Limit" name="credit_limit">
+                            <field name="fal_sale_warning_type"/>
+                        </group> -->
+                        <group string="Credit" name="credit">
+                            <field name="fal_sale_warning_type" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="credit_limit" widget="monetary" attrs="{'readonly': [('can_edit_form', '=', False)],'invisible': [('fal_sale_warning_type', 'not in', ('value', 'valuedate'))]}"/>
+                            <div attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}" colspan="2">
+                                <span>
+                                    Date has some level:
+                                    <br/>
+                                    1. position 0: if total receivable &lt; 0, but oldest invoice age is &lt;= 0 days
+                                    <br/>
+                                    2. position 1: if total receivable &lt; 0 and the oldest invoice age is 1 - 30 days
+                                    <br/>
+                                    3. position 2: if total receivable &lt; 0 and the oldest invoice age is 31 - 60 days
+                                    <br/>
+                                    4. position 3: if total receivable &lt; 0 and the oldest invoice age is 61 - 90 days
+                                    <br/>
+                                    5. position 4: if total receivable &lt; 0 and the oldest invoice age is &gt; 90 days
+                                </span>
+                            </div>
+                            <field name="fal_deptor_position" string="Current Position" attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}"/>
+                            <field name="fal_block_level" attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])], 'readonly': 1}"/>
+                            <field name="fal_oldest_invoice_no" attrs="{'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}"/>
+                        </group>
+                    </group>
+                </page>
+                <page string='Accounting' name='rvd_accounting'>
+                    <group>
+                        <group string="Pajak" name="pajak">
+                            <field name="name" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="vat" string="NPWP" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <span class="o_form_label o_td_label" name="address_name">
+                                <b attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}">Company Address</b>
+                                <b attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'invoice')]}">Invoice Address</b>
+                                <b attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'delivery')]}">Delivery Address</b>
+                                <b attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'other')]}">Other Address</b>
+                                <b attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'private')]}">Private Address</b>
+                                <b attrs="{'invisible': ['&amp;', ('parent_id', '!=', False), ('type', '!=', False)]}">Address</b>
+                            </span>
+                            <div class="o_address_format" attrs="{'readonly': [('can_edit_form', '=', False)]}">
+                                <field name="street" placeholder="Street..." class="o_address_street"
+                                    attrs="{'readonly': ['|', ('type', '=', 'contact'),('parent_id', '!=', False),('can_edit_form', '=', False)]}"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                    attrs="{'readonly': ['|', ('type', '=', 'contact'),('parent_id', '!=', False),('can_edit_form', '=', False)]}"/>
+                                <field name="city" placeholder="City" class="o_address_city"
+                                    attrs="{'readonly': ['|', ('type', '=', 'contact'),('parent_id', '!=', False),('can_edit_form', '=', False)]}"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}"
+                                    attrs="{'readonly': ['|', ('type', '=', 'contact'),('parent_id', '!=', False),('can_edit_form', '=', False)]}" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                    attrs="{'readonly': ['|', ('type', '=', 'contact'),('parent_id', '!=', False),('can_edit_form', '=', False)]}"/>
+                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'
+                                    attrs="{'readonly': ['|', ('type', '=', 'contact'),('parent_id', '!=', False),('can_edit_form', '=', False)]}"/>
+                            </div>
+                            <field name="npkp" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="date_npkp" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>   
+                        </group>
+
+                        <group string="Status" name="status">
+                            <field name="kode_transaksi" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="kode_status" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="nik" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="ppn" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="date_receive_invoice" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="date_payment_invoice" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                        </group>
+
+                        <group string="Pemegang Saham" name="saham">
+                            <field name="owner_saham_ids" widget="one2many" nolabel="1" attrs="{'readonly': [('can_edit_form', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="ktp" string="KTP"/>
+                                    <field name="street" string="Alamat"/>
+                                    <field name="jumlah_saham"/>
+                                </tree>
+                            </field>
+                        </group>
+
+                        <group string="Penanggung Jawab" name="penanggung">
+                            <field name="penanggung_jawab_ids" widget="one2many" nolabel="1" attrs="{'readonly': [('can_edit_form', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="ktp" string="KTP"/>
+                                    <field name="street" string="Alamat"/>
+                                    <field name="phone"/>
+                                </tree>
+                            </field>
+                        </group>                        
+                    </group>
+                </page>
+                <page string="Remarks" name="remarks">
+                    <group>
+                        <field name="remarks_1"/>
+                        <field name="remarks_2"/>
+                    </group>
+                </page>
+                <page string="Harga Jual" name="harga_jual">
+                    <group>
+                        <group string="Pricelist" name="pricelist">
+                            <field name="property_product_pricelist" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="blue_price_item" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="rounded_price_item" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="rounded_blue_price" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="harga_customer" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="harga_support" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="tm" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                        </group>
+                        <group string="Price Sharing" name="price_sharing">
+                            <field name="branch_name" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                            <field name="adj_cust_price" attrs="{'readonly': [('can_edit_form', '=', False)]}"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="Document" name="upload_document">
+                    <field string="Document" name="rvd_documents_ids" attrs="{'readonly': [('can_edit_form', '=', False)]}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="create_date"/>
+                            <field name="exp_date"/>
+                            <field name="document"/>
+                            <field name="remarks"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name"/>
+                                <field name="create_date"/>
+                                <field name="exp_date"/>
+                                <field name="document"/>
+                                <field name="remarks"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page string="Service Level" name="service_level">
+                    <group>
+                        <group>
+                            <field name="service_lvl"/>
+                            <field name="contract_period"/>
+                            <field name="cust_type"/>
+                            <field name="prior_brand_ids" widget="many2many_tags"/>
+                            <!-- <field name="reserved_brand_ids" widget="many2many_tags"/> -->
+                            <field name="cust_attachment"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page[@name='sales_purchases']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//notebook/page[@name='internal_notes']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partners_credit_rivindi_account" model="ir.ui.view">
+        <field name="name">view.res.partner.credit.rivindi</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="fal_partner_credit_limit.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fal_sale_warning_type']" position="attributes">
+                <attribute name="attrs">{'readonly':[('can_edit_form', '=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='credit_limit']" position="attributes">
+                <attribute name="attrs">{'readonly':[('can_edit_form', '=', False)],'invisible':[('fal_sale_warning_type','not in',('value', 'valuedate'))]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='fal_block_level']" position="attributes">
+                <attribute name="attrs">{'readonly':[('can_edit_form', '=', False)],'invisible': [ ('fal_sale_warning_type', 'not in', ['valuedate', 'days'])]}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_partners_form_rivindi_account" model="ir.ui.view">
+        <field name="name">view.res.partner.form.rivindi</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field eval="10" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='accounting']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="contacts.action_contacts" model="ir.actions.act_window">
+        <field name="domain">[('type', '=', 'contact'), ('saham_id', '=', False), ('penanggung_id', '=', False)]</field>
+        <field name="context">{'default_is_company': True, 'default_type': 'contact'}</field>
+    </record>
+</odoo>

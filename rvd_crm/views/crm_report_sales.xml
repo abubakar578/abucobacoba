@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="crm_report_sales_view_form" model="ir.ui.view">
+        <field name="name">crm.report.sales.form</field>
+        <field name="model">crm.report.sales</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <label for="sales_admin_id" attrs="{'invisible': [('is_sales_person', '=', True)]}" string="CSS"/>
+                    <label for="sales_person_id" attrs="{'invisible': [('is_sales_admin', '=', True)]}"/>
+                    <h1>
+                        <field name="sales_person_id" attrs="{'invisible': [('is_sales_admin', '=', True)]}"/>
+                        <field name="sales_admin_id" attrs="{'invisible': [('is_sales_person', '=', True)]}" string="CSS"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="is_sales_admin" invisible="1"/>
+                            <field name="is_sales_person" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                   <notebook>
+                        <page string="Record List" name="record_crm_ids">
+                            <field name="record_crm_ids" force_save="1">
+                                <tree delete="0" create="0" default_order="crm_lead_id">
+                                    <field name="crm_lead_id"/>
+                                    <field name="old_stage"/>
+                                    <field name="new_stage"/>
+                                    <field name="new_date" string="Update Date"/>
+                                    <field name="duration" string="Duration(Minutes)"/>
+                                </tree>
+                            </field>
+                            <group name="note_group" col="6" class="mt-2 mt-md-0" attrs="{'invisible': [('is_sales_admin', '=', False)]}">
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="total_duration">
+                                    <field name="total" string="Total " widget="monetary"/>
+                                    <field name="percentage" string="Percentage (%) " widget="monetary"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>                    
+                        </page>
+                        <page string="Record Activity" name="record_activity_ids" attrs="{'invisible': [('is_sales_admin', '=', True)]}">
+                            <field name="record_activity_ids" >
+                                <tree delete="0" create="0">
+                                    <field name="date"/>
+                                    <field name="total_activity"/>
+                                    <field name="total_p2q"/>
+                                    <field name="total_p2w"/>
+                                    <field name="total_lost"/>
+                                    <field name="total_won"/>
+                                </tree>
+                            </field>                   
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model='ir.ui.view' id='crm_report_sales_tree'>
+        <field name='name'>crm.report.sales.tree</field>
+        <field name="model">crm.report.sales</field>
+        <field name='arch' type='xml'>
+            <tree string='Report Sales'>
+                <field name="sales_admin_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="percentage"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_report_sales_admin" model="ir.actions.act_window">
+        <field name="name">Report Sales admin</field>
+        <field name="res_model">crm.report.sales</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_is_sales_admin': True}</field>
+        <field name="domain">[('is_sales_admin', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+            </p>
+        </field>
+    </record>
+
+    <record id="action_report_sales_person" model="ir.actions.act_window">
+        <field name="name">Report Sales Person</field>
+        <field name="res_model">crm.report.sales</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_is_sales_person': True}</field>
+        <field name="domain">[('is_sales_person', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+            </p>
+        </field>
+    </record>
+
+    <!-- pivot Record Activity-->
+
+    <record id="view_record_activity_pivot" model="ir.ui.view">
+        <field name="name">record.activity.pivot</field>
+        <field name="model">record.activity</field>
+        <field name="arch" type="xml">
+            <pivot string="Commission Report">
+                <field name="sales_person_id" type="row"/>
+                <field name="report_sales_id" type="measure"/>
+                <field name="total_activity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_record_activity_action" model="ir.actions.act_window">
+        <field name="name">Sales Activity</field>
+        <field name="res_model">record.activity</field>
+        <field name="view_mode">pivot</field>
+        <!-- <field name="domain">[('fal_salesperson', '!=', False)]</field> -->
+        <field name="context">{'group_by':['report_sales_id']}</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+          </p>
+        </field>
+    </record>
+
+    <!-- Menu item -->
+    <menuitem id="menu_report_sales" name="Report Sales" sequence="4" parent="crm.crm_menu_report"/>
+
+    <menuitem
+        id="menu_report_sales_admin"
+        name="Report Sales Admin"
+        action="action_report_sales_admin"
+        parent="menu_report_sales"
+        groups="sales_team.group_sale_manager"
+        sequence="1"/>
+
+    <menuitem
+        id="menu_report_sales_person"
+        name="Report Sales Person"
+        action="action_report_sales_person"
+        parent="menu_report_sales"
+        groups="sales_team.group_sale_manager"
+        sequence="2"/>
+
+    <menuitem
+        id="menu_record_activity"
+        name="Sales Activity"
+        action="view_record_activity_action"
+        parent="crm.crm_menu_report"
+        groups="sales_team.group_sale_manager"
+        sequence="5"/>
+
+    <menuitem
+        id="menu_calendar_view"
+        name="Calendar Activity"
+        parent="crm.crm_menu_sales"
+        action="action_view_calendar_activity"
+        sequence="3"/>
+
+</odoo>

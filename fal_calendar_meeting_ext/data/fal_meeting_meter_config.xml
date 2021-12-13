@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- notify all employees of module installation -->
+        <!-- mail_alias_meeting -->
+        <!--default alias for leads-->
+        <record id="mail_alias_meeting" model="mail.alias">
+            <field name="alias_name">meeting</field>
+            <field name="alias_model_id" ref="model_calendar_event"/>
+            <field name="alias_user_id" ref="base.user_root"/>
+            <field name="alias_contact">employees</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,583 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* fal_calendar_meeting_ext
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-24 06:45+0000\n"
+"PO-Revision-Date: 2016-08-24 06:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "<span> hours</span>"
+msgstr "<span> heures</span>"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_actual_cost
+msgid "Actual Cost"
+msgstr "Actual Cost"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_actual_duration
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_actual_duration
+msgid "Actual Duration"
+msgstr "Actual Duration"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_actual_duration_gap
+msgid "Actual Duration Gap"
+msgstr "Actual Duration Gap"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/wizard/fal_calendar_meeting_wizard.py:74
+#, python-format
+msgid "Add Agenda"
+msgstr "Add Agenda"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,name:fal_calendar_meeting_ext.calendar_event_add_invitation_wizard_action
+msgid "Add Invitation"
+msgstr "Add Invitation"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_meeting_agenda_ids
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_stop_timer_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Agenda"
+msgstr "Agenda"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:179
+#, python-format
+msgid "Allocate Time"
+msgstr "Allocate Time"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_attendee_ids
+msgid "Attendees"
+msgstr "Participants"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_calendar_event_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_calendar_event_id
+msgid "Calendar ID"
+msgstr "Calendar ID"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_add_invitation_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_stop_timer_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_warning_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_fal_meeting_agenda_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_meeting_category
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_res_partner_fal_meeting_category
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_name
+msgid "Category Name"
+msgstr "Nom de la catégorie"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,help:fal_calendar_meeting_ext.action_view_fal_meeting_standard_rates
+msgid "Click to create a standard rates."
+msgstr "Click to create a standard rates."
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.fal_contact_configuration
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.menu_fal_meeting_configuration
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_partner_id
+msgid "Contact"
+msgstr "Contact"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.fal_dashboard
+msgid "Contacts"
+msgstr "Contacts"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_fal_meeting_agenda_form
+msgid "Create"
+msgstr "Créer"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_add_invitation_wizard_form
+msgid "Create Invitation"
+msgstr "Create Invitation"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,help:fal_calendar_meeting_ext.action_fal_meeting_presence_required
+msgid "Create Meeting Presence Category"
+msgstr "Create Meeting Presence Category"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,help:fal_calendar_meeting_ext.action_fal_meeting_role
+msgid "Create Meeting Role Category"
+msgstr "Create Meeting Role Category"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_create_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_create_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.menu_fal_meeting_dashboard
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_display_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_effective_presence
+msgid "Effective Presence"
+msgstr "Effective Presence"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_elapsed_time
+msgid "Elapsed Time"
+msgstr "Elapsed Time"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_calendar_event
+msgid "Event"
+msgstr "Évènement"
+
+#. module: fal_calendar_meeting_ext
+#: selection:fal.meeting.standard.rates,fal_partner_meeting_category:0
+#: selection:res.partner,fal_meeting_category:0
+msgid "External"
+msgstr "External"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_id
+msgid "ID"
+msgstr "ID"
+
+#. module: fal_calendar_meeting_ext
+#: selection:calendar.event,fal_important_category:0
+msgid "Important"
+msgstr "Important"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_important_category
+msgid "Important Category"
+msgstr "Important Category"
+
+#. module: fal_calendar_meeting_ext
+#: selection:fal.meeting.standard.rates,fal_partner_meeting_category:0
+#: selection:res.partner,fal_meeting_category:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role___last_update
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_write_uid
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_write_uid
+msgid "Last Updated by"
+msgstr "Mis à jour par"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_add_invitation_wizard_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_write_date
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_write_date
+msgid "Last Updated on"
+msgstr "Mis à jour le"
+
+#. module: fal_calendar_meeting_ext
+#: selection:calendar.event,fal_important_category:0
+msgid "Low"
+msgstr "Low"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_meeting_mom
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "MOM"
+msgstr "MOM"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_calendar_event_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_calendar_event_id
+msgid "Meeting"
+msgstr "Rendez-vous"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_agenda_ids
+msgid "Meeting Agenda"
+msgstr "Meeting Agenda"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_res_company_meeting_management_fal_form
+msgid "Meeting Management"
+msgstr "Meeting Management"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.menu_fal_meeting_presence_required
+msgid "Meeting Presence Category"
+msgstr "Meeting Presence Category"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.menu_fal_meeting_role
+msgid "Meeting Role Category"
+msgstr "Meeting Role Category"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Meeting Summary"
+msgstr "Meeting Summary"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_meeting_sequence
+msgid "Meeting sequence"
+msgstr "Meeting sequence"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_partner_id
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_presence_required_name
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_role_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_need_double_validation
+msgid "Need Double Validation"
+msgstr "Need Double Validation"
+
+#. module: fal_calendar_meeting_ext
+#: selection:calendar.event,fal_important_category:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Participants"
+msgstr "Participants"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_fal_partner_meeting_category
+msgid "Partner Meeting Category"
+msgstr "Partner Meeting Category"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_partner_ids
+msgid "Partner ids"
+msgstr "Partner ids"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Pause Meeting"
+msgstr "Pause Meeting"
+
+#. module: fal_calendar_meeting_ext
+#: selection:calendar.event,fal_stopwatch_status:0
+msgid "Paused"
+msgstr "Paused"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:81
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:254
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:266
+#, python-format
+msgid "Please Check between meeting duration and agenda duration you have"
+msgstr "Please Check between meeting duration and agenda duration you have"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_stop_timer_wizard_form
+msgid "Please allocate time to the agenda:"
+msgstr "Please allocate time to the agenda:"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,name:fal_calendar_meeting_ext.action_fal_meeting_presence_required
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_presence_required
+msgid "Presence Required"
+msgstr "Presence Required"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Resume Meeting"
+msgstr "Resume Meeting"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,name:fal_calendar_meeting_ext.action_fal_meeting_role
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_calendar_event_attendee_role
+msgid "Role"
+msgstr "Role"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,help:fal_calendar_meeting_ext.field_calendar_event_fal_meeting_sequence
+msgid "Showing how much validated meeting has been occured"
+msgstr "Showing how much validated meeting has been occured"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_partner_id
+msgid "Speaker"
+msgstr "Speaker"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,name:fal_calendar_meeting_ext.action_view_fal_meeting_standard_rates
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_standard_rates_rates
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_res_partner_fal_standard_rates
+#: model:ir.ui.menu,name:fal_calendar_meeting_ext.fal_meeting_standard_rates_menu
+msgid "Standard Rates"
+msgstr "Standard Rates"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.actions.act_window,help:fal_calendar_meeting_ext.action_view_fal_meeting_standard_rates
+msgid "Standard rates are attributes for partner and used in meeting management."
+msgstr "Standard rates are attributes for partner and used in meeting management."
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Start Meeting"
+msgstr "Start Meeting"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_start_time
+msgid "Start Time"
+msgstr "Start Time"
+
+#. module: fal_calendar_meeting_ext
+#: selection:calendar.event,fal_stopwatch_status:0
+msgid "Started"
+msgstr "Started"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "Stop Meeting"
+msgstr "Stop Meeting"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_stop_timer_wizard_form
+msgid "Stop and Allocate Time"
+msgstr "Stop and Allocate Time"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_stopwatch_status
+msgid "Stop watch status"
+msgstr "Stop watch status"
+
+#. module: fal_calendar_meeting_ext
+#: selection:calendar.event,fal_stopwatch_status:0
+msgid "Stopped"
+msgstr "Stopped"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_name
+msgid "Subject"
+msgstr "Objet"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_estimated_cost
+msgid "Target Cost"
+msgstr "Target Cost"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_estimated_duration
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_fal_meeting_agenda_target_duration
+msgid "Target Duration"
+msgstr "Target Duration"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_target_duration_gap
+msgid "Target Duration Gap"
+msgstr "Target Duration Gap"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:80
+#, python-format
+msgid "Target Duration Gap cannot have Negative Value!"
+msgstr "Target Duration Gap cannot have Negative Value!"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:251
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:263
+#, python-format
+msgid "There is duplicate attendees"
+msgstr "There is duplicate attendees"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:57
+#, python-format
+msgid "There is some false configuration"
+msgstr "There is some false configuration"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_stop_timer_wizard_to_allocate_time
+msgid "Time to Allocate"
+msgstr "Time to Allocate"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "To Draft"
+msgstr "To Draft"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "To Submit"
+msgstr "To Submit"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_calendar_event_form_fal
+msgid "To Validate"
+msgstr "To Validate"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_fal_total_target_duration
+msgid "Total Target Duration"
+msgstr "Total Target Duration"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_add_invitation_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_stop_timer_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_warning_wizard_form
+msgid "Warning"
+msgstr "Warning"
+
+#. module: fal_calendar_meeting_ext
+#: code:addons/fal_calendar_meeting_ext/models/calendar_event.py:35
+#: model:ir.model.fields,field_description:fal_calendar_meeting_ext.field_calendar_event_warning_wizard_warning_msg
+#, python-format
+msgid "Warning Message"
+msgstr "Warning Message"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model.fields,help:fal_calendar_meeting_ext.field_calendar_event_meeting_mom
+msgid "Write meeting MOM here"
+msgstr "Write meeting MOM here"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_warning_wizard_form
+msgid "Yes"
+msgstr "Oui"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_calendar_event_add_invitation_wizard
+msgid "calendar.event.add.invitation.wizard"
+msgstr "calendar.event.add.invitation.wizard"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_calendar_event_stop_timer_wizard
+msgid "calendar.event.stop.timer.wizard"
+msgstr "calendar.event.stop.timer.wizard"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_calendar_event_warning_wizard
+msgid "calendar.event.warning.wizard"
+msgstr "calendar.event.warning.wizard"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_fal_calendar_event_attendee
+msgid "fal.calendar.event.attendee"
+msgstr "fal.calendar.event.attendee"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_fal_meeting_agenda
+msgid "fal.meeting.agenda"
+msgstr "fal.meeting.agenda"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_fal_meeting_presence_required
+msgid "fal.meeting.presence.required"
+msgstr "fal.meeting.presence.required"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_fal_meeting_role
+msgid "fal.meeting.role"
+msgstr "fal.meeting.role"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.model,name:fal_calendar_meeting_ext.model_fal_meeting_standard_rates
+msgid "fal.meeting.standard.rates"
+msgstr "fal.meeting.standard.rates"
+
+#. module: fal_calendar_meeting_ext
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_add_invitation_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_stop_timer_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.calendar_event_warning_wizard_form
+#: model:ir.ui.view,arch_db:fal_calendar_meeting_ext.view_fal_meeting_agenda_form
+msgid "or"
+msgstr "ou"
+

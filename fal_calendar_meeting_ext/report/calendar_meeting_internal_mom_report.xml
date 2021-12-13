@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="calendar_meeting_internal_mom_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <h2>
+                            Meeting Summary
+                        </h2>
+                        <div>
+                            <ul style="list-style: none;">
+                                <li>
+                                    Subject: <span t-field="o.name"/>
+                                </li>
+                                <li>
+                                    Date: <span t-field="o.start_date"/>
+                                </li>
+                                <br/>
+                                <li>
+                                    List of participants:
+                                    <ul class="col-xs-offset-1 col-xs-11">
+                                        <t t-foreach="o.attendee_ids" t-as="x">
+                                            <li>
+                                                <span t-field="x.partner_id.name"/><span t-if="x.partner_id.company_id.name">, <span t-field="x.partner_id.company_id.name"/></span><span t-if="x.role.name">, <span t-field="x.role.name"/></span> / <span t-if="x.effective_presence"> Participated </span> <span t-if="not x.effective_presence"> Did not Participate </span>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Agenda:
+                                    <br/>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                           <th>Subject</th>
+                                           <th>Speaker</th>
+                                           <th class="text-right">Target Duration</th>
+                                           <th class="text-right">Actual Duration</th>
+                                         </tr>
+                                         <t t-foreach="o.fal_meeting_agenda_ids" t-as="x">
+                                            <tr>
+                                                <td><span t-field="x.name"/></td>
+                                                <td><span t-field="x.partner_id.name"/></td>
+                                                <td class="text-right"><t t-esc="'%02d:%02d' % (int(str(x.target_duration).split('.')[0]), int(round(float(str('%.2f' % x.target_duration).split('.')[1])/100*60, 0)))" /></td>
+                                                <td class="text-right"><t t-esc="'%02d:%02d' % (int(str(x.actual_duration).split('.')[0]), int(round(float(str('%.2f' % x.actual_duration).split('.')[1])/100*60, 0)))" /></td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                        <p style="page-break-after:always;">   </p>
+                        <h2>
+                            Minutes of Meeting
+                        </h2>
+                        <p>
+                            <span t-field="o.meeting_mom"/>
+                        </p>
+                    </div>
+                </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

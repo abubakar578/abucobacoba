@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_fal_meeting_configuration" name="Configuration" parent="calendar.mail_menu_calendar" sequence="99" groups="fal_calendar_meeting_ext.group_calendar_user"/>
+        <menuitem id="menu_fal_meeting_presence_required" name="Meeting Presence Category" parent="menu_fal_meeting_configuration" sequence="1" action="action_fal_meeting_presence_required"/>
+        <menuitem id="menu_fal_meeting_role" name="Meeting Role Category" parent="menu_fal_meeting_configuration" sequence="2" action="action_fal_meeting_role"/>
+        <menuitem id="menu_fal_meeting_type" name="Meeting Type" parent="menu_fal_meeting_configuration" sequence="3" action="action_fal_meeting_type"/>
+        <menuitem id="menu_fal_meeting_global_settings" name="Meeting Mail Config" parent="menu_fal_meeting_configuration" sequence="0" action="action_calendar_config_settings" groups="base.group_system"/>
+        <menuitem id="fal_meeting_standard_rates_menu" groups="account.group_account_manager" name="Standard Rates" parent="menu_fal_meeting_configuration" action="action_view_fal_meeting_standard_rates"/>
+    </data>
+</odoo>

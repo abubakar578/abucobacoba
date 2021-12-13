@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- Stage -->
+
+    <record model="crm.stage" id="stage_outstanding_draft">
+        <field name="name">Peluang</field>
+        <field name="sequence">1</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead1">
+        <field name="name">Pemohonan Penawaran</field>
+        <field name="sequence">2</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead3">
+        <field name="name">Proses Penawaran</field>
+        <field name="sequence">3</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead2">
+        <field name="name">Quoted</field>
+        <field name="sequence">4</field>
+    </record>
+    <record model="crm.stage" id="stage_follow_up">
+        <field name="name">Follow Up</field>
+        <field name="sequence">5</field>
+    </record>
+    <record model="crm.stage" id="crm.stage_lead4">
+        <field name="name">Berhasil</field>
+        <field name="fold" eval="False"/>
+        <field name="is_won">True</field>
+        <field name="sequence">70</field>
+    </record>
+    <record model="crm.stage" id="stage_lost">
+        <field name="name">Gagal</field>
+        <field name="sequence">76</field>
+    </record>
+
+    <!-- Cron -->
+    <record model="ir.cron" id="rvd_cron_crm_status">
+       <field name="name">Change's Status CRM</field>
+       <field name="interval_number">1</field>
+       <field name="interval_type">days</field>
+       <field name="numbercall">-1</field>
+       <field name="model_id" ref="model_crm_lead"/>
+       <field name="state">code</field>
+       <field name="code">model._change_status()</field>
+    </record>
+
+    <record model="ir.cron" id="rvd_send_email">
+       <field name="name">Check meeting Leads</field>
+       <field name="interval_number">1</field>
+       <field name="interval_type">days</field>
+       <field name="numbercall">-1</field>
+       <field name="model_id" ref="model_crm_lead"/>
+       <field name="state">code</field>
+       <field name="code">model.action_count_meeting()</field>
+    </record>
+</odoo>

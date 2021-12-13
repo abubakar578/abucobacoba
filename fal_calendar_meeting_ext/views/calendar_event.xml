@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Res.Partner -->
+        <record id="view_calendar_event_form_fal" model="ir.ui.view">
+            <field name="name">view.calendar.event.form.fal</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form" />
+            <field name="arch" type="xml">
+                    <!-- Add Sequence -->
+                    <xpath expr="//field[@name='attendee_status']" position="after">
+                        <group>
+                            <field name="fal_meeting_sequence" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+                        </group>
+                    </xpath>
+                    <!-- Add Meeting Type Info on Meeting Details -->
+                    <xpath expr="//field[@name='categ_ids']" position="after">
+                        <field name="fal_meeting_type"/>
+                        <field name="id" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                        <field name="fal_important_category"/>
+                    </xpath>
+                    <field name="recurrency" position="after">
+                        <field name="fal_use_agenda" groups="fal_calendar_meeting_ext.group_calendar_user"/>
+                    </field>
+                    <!-- Add Page Meeting Summary which display Summary of Time and Cost + The Stopwatch -->
+                    <xpath expr="//notebook/page[1]" position="before">
+                        <page string="Meeting Summary">
+                            <separator string="Cost &amp; Time Summary"/>
+                            <group>
+                                <group>
+                                    <field name="id" invisible="1"/>
+                                    <field name="fal_stopwatch_status" invisible="1"/>
+                                    <field name="fal_elapsed_time" invisible="1"/>
+                                    <field name="fal_estimated_cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <label for="fal_estimated_duration"/>
+                                    <div>
+                                        <field name="fal_estimated_duration" widget="float_time" class="oe_inline"/>
+                                        <span> hours</span>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="fal_actual_cost" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="fal_total_actual_duration" attrs="{'invisible': [('fal_use_agenda', '=', False)]}"/>
+                                    <field name="fal_total_real_actual_duration" string="Total Actual Duration" attrs="{'invisible': [('fal_use_agenda', '!=', False)]}"/>
+                                </group>
+                            </group>
+
+                            <div attrs="{'invisible': ['|',('state', '!=', 'open'), ('fal_use_agenda', '=', False)]}" style="width: 100%">
+                                <div class="oe_span6">
+                                    <img src='/fal_calendar_meeting_ext/static/src/img/stopwatch.png' style="margin-left:4%; width:50px" alt="Stopwatch"/>
+                                    <h2>Stopwatch Time</h2>
+                                </div>
+                                <div class="oe_span6">
+                                    <field style="font-size:16px; margin-left:4%;" name="fal_actual_duration" widget="float_time" class="oe_inline"/>
+                                </div>
+                                <br/>
+                                <button type="object" name="start_timer"  style="margin-left: 5px" string="Start Meeting" class="oe_highlight" attrs="{'invisible': [('fal_stopwatch_status', 'in', ['start','pause'])]}" />
+                                <button type="object" name="pause_timer"  style="margin-left: 5px" string="Pause Meeting"  class="oe_highlight" attrs="{'invisible': [('fal_stopwatch_status', 'in', ['stop', 'pause'])]}"/>
+                                <button type="object" name="resume_timer"  style="margin-left: 5px" string="Resume Meeting"  class="oe_highlight" attrs="{'invisible': [('fal_stopwatch_status', 'in', ['start', 'stop'])]}"/>
+                                <button type="object" name="stop_timer" style="margin-left: 5px" string="Stop Meeting"  class="oe_highlight" attrs="{'invisible': [('fal_stopwatch_status', '=', 'stop')]}"/>
+                            </div>
+                        </page>
+                    </xpath>
+                    <xpath expr="//notebook/page[@name='page_options']//field[@name='recurrence_id']" position="after">
+                        <field name="currency_id" groups="base.group_multi_currency"/>
+                    </xpath>
+                    <xpath expr="//notebook/page[@name='page_options']" position="after">
+                        <page string="Agenda" groups="fal_calendar_meeting_ext.group_calendar_user" attrs="{'invisible': [('fal_use_agenda', '=', False)]}">
+                            <field name="fal_meeting_agenda_ids">
+                                <tree editable="bottom" default_order="name">
+                                    <field name="calendar_event_state" invisible="1"/>
+                                    <field name="name"/>
+                                    <field name="partner_id" domain="[('id', 'in', parent.partner_ids)]"/>
+                                    <field name="target_duration" widget="float_time" string="Target Duration" sum="Target Duration"/>
+                                    <field name="actual_duration" attrs="{'readonly': [('calendar_event_state', 'in', ['draft', 'submit',False])]}" widget="float_time" string="Actual Duration" sum="Actual Duration"/>
+                                </tree>
+                            </field>
+                            <group string="Duration Summary">
+                                <field name="fal_total_target_duration" widget="float_time"/>
+                                <field name="fal_total_actual_duration" widget="float_time"/>
+                                <field name="fal_actual_duration_gap" widget="float_time"/>
+                            </group>
+                        </page>
+                        <page string="MOM" name="mom">
+                            <notebook>
+                                <page string="Internal MOM">
+                                    <field name="meeting_mom" nolabel="1"/>
+                                </page>
+                                <page string="Public MOM">
+                                    <field name="fal_public_mom" nolabel="1"/>
+                                </page>
+                            </notebook>
+                        </page>
+                    </xpath>
+                    <xpath expr="//notebook/page[@name='page_invitations']" position="attributes">
+                        <attribute name="groups"></attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='attendee_ids']/tree/field[@name='email']" position="after">
+                        <field name="meeting_category"/>
+                        <field name="role"/>
+                        <field name="presence_required"/>
+                        <field name="effective_presence"/>
+                    </xpath>
+                    <xpath expr="//field[@name='state']" position="replace">
+                    </xpath>
+                    <xpath expr="//sheet" position="before">
+                        <header>
+                            <button name="button_action_cancel" string="Cancel Meeting" type="object" states="draft"/>
+                            <button name="button_action_submit" string="Done" type="object" states="draft" class="btn-primary"/>
+                            <!-- <button name="button_action_validate" string="Validate" type="object" states="submit" groups="fal_calendar_meeting_ext.group_calendar_user" class="btn-primary"/>
+                            <button name="button_action_confirm" string="Confirm" type="object" states="validate" groups="fal_calendar_meeting_ext.group_calendar_user" class="btn-primary"/>
+                            <button name="button_action_close" string="Close Event" type="object" states="open" groups="fal_calendar_meeting_ext.group_calendar_user" class="btn-primary"/> -->
+                            <button name="button_action_draft" string="Set to Draft" type="object" states="cancel,submit" groups="fal_calendar_meeting_ext.group_calendar_user"/>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,submit"/>
+                        </header>
+                    </xpath>
+                    <xpath expr="//div[hasclass('oe_chatter')]" position="inside">
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </xpath>
+            </field>
+        </record>
+
+        <record id="view_calendar_event_tree_fal" model="ir.ui.view">
+            <field name="name">view.calendar.event.tree.fal</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='partner_ids']" position="after">
+                        <field name="fal_meeting_type"/>
+                    </xpath>
+                    <xpath expr="//field[@name='duration']" position="after">
+                        <field name="fal_meeting_sequence" widget="handle"/>
+                        <field name="state" invisible="1"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Presence Required -->
+        <record id="view_fal_meeting_presence_required_form" model="ir.ui.view">
+            <field name="name">view.fal.meeting.presence.required.form</field>
+            <field name="model">fal.meeting.presence.required</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fal_meeting_presence_required_tree" model="ir.ui.view">
+            <field name="name">view.fal.meeting.presence.required.tree</field>
+            <field name="model">fal.meeting.presence.required</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Role -->
+        <record id="view_fal_meeting_role_form" model="ir.ui.view">
+            <field name="name">view.fal.meeting.role.form</field>
+            <field name="model">fal.meeting.role</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fal_meeting_role_tree" model="ir.ui.view">
+            <field name="name">view.fal.meeting.role.tree</field>
+            <field name="model">fal.meeting.role</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Type -->
+        <record id="view_fal_meeting_type_form" model="ir.ui.view">
+            <field name="name">view.fal.meeting.type.form</field>
+            <field name="model">fal.meeting.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="fal_mail_template_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fal_meeting_type_tree" model="ir.ui.view">
+            <field name="name">view.fal.meeting.type.tree</field>
+            <field name="model">fal.meeting.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Meeting Agenda -->
+        <record id="view_fal_meeting_agenda_form" model="ir.ui.view">
+            <field name="name">view.fal.meeting.agenda.form</field>
+            <field name="model">fal.meeting.agenda</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="calendar_event_state" invisible="1"/>
+                            <field name="name"/>
+                            <field name="partner_id" domain="[('id', 'in', context.get('parent_partner_ids'))]"/>
+                            <field name="target_duration"/>
+                            <field name="actual_duration" attrs="{'readonly': [('calendar_event_state', 'in', ['draft', 'submit',False])]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_fal_meeting_presence_required" model="ir.actions.act_window">
+            <field name="name">Presence Required</field>
+            <field name="res_model">fal.meeting.presence.required</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Meeting Presence Category
+                </p>
+            </field>
+        </record>
+
+        <record id="action_fal_meeting_type" model="ir.actions.act_window">
+            <field name="name">Meeting Type</field>
+            <field name="res_model">fal.meeting.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Meeting Type
+                </p>
+            </field>
+        </record>
+
+        <record id="action_fal_meeting_role" model="ir.actions.act_window">
+            <field name="name">Role</field>
+            <field name="res_model">fal.meeting.role</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Meeting Role Category
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_fal_calendar_event_kanban">
+            <field name="name">view.fal.calendar.event.kanban</field>
+            <field name="model">calendar.event</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey" default_group_by="state" quick_create="false">
+                    <field name="name"/>
+                    <field name="partner_ids"/>
+                    <field name="start"/>
+                    <field name="state"/>
+                    <field name="location"/>
+                    <field name="fal_meeting_type"/>
+                    <field name="duration"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_content">
+                                    <h4><field name="name"/></h4>
+                                    <field name="start"/>
+                                    <br/>
+                                    <field name="fal_meeting_type"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="calendar.action_view_calendar_event_calendar" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+        </record>
+
+        <record id="calendar.action_view_calendar_event_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+        </record>
+
+        <record id="fal_send_internal_mom_email" model="ir.actions.act_window">
+            <field name="name">Send Internal MOM by Email</field>
+            <field name="res_model">mail.compose.message</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context" eval="{
+    'default_composition_mode': 'comment',
+    'mail_post_autofollow': True,
+    'default_use_template': True,
+    'default_template_id': ref('fal_calendar_meeting_ext.fal_email_template_internal_mom'),
+    'force_email': True,
+    'custom_layout': 'mail.mail_notification_light',
+                }"/>
+            <field name="binding_model_id" ref="model_calendar_event"/>
+            <field name="binding_view_types">form,list</field>
+        </record>
+
+
+        <record id="fal_send_public_mom_email" model="ir.actions.act_window">
+            <field name="name">Send Public MOM by Email</field>
+            <field name="res_model">mail.compose.message</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context" eval="{
+    'default_composition_mode': 'comment',
+    'mail_post_autofollow': True,
+    'default_use_template': True,
+    'default_template_id': ref('fal_calendar_meeting_ext.fal_email_template_public_mom'),
+    'force_email': True,
+    'custom_layout': 'mail.mail_notification_light',
+                }"/>
+            <field name="binding_model_id" ref="model_calendar_event"/>
+            <field name="binding_view_types">form,list</field>
+        </record>
+    </data>
+</odoo>

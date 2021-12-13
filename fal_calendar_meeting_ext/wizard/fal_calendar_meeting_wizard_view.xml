@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="calendar_event_warning_wizard_form" model="ir.ui.view">
+            <field name="name">view.calendar.event.warning.wizard.form</field>
+            <field name="model">calendar.event.warning.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Warning">
+                    <group>
+                        <field name="calendar_event_id" invisible="1"/>
+                        <field name="warning_msg"/>
+                    </group>
+                    <footer>
+                        <button name="confirm_meeting" string="Yes" type="object" class="oe_highlight bombutton"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="calendar_event_add_invitation_wizard_form" model="ir.ui.view">
+            <field name="name">view.calendar.event.add.invitation.wizard.form</field>
+            <field name="model">calendar.event.add.invitation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Warning">
+                    <group>
+                        <field name="calendar_event_id" invisible="1"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <footer>
+                        <button name="create_invitation" string="Create Invitation" type="object" class="oe_highlight bombutton"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="calendar_event_add_invitation_wizard_action" model="ir.actions.act_window">
+            <field name="name">Add Invitation</field>
+            <field name="res_model">calendar.event.add.invitation.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="calendar_event_add_invitation_wizard_form"/>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="model_calendar_event"/>
+            <field name="binding_view_types">form,list</field>
+        </record>
+
+        <record id="calendar_event_stop_timer_wizard_form" model="ir.ui.view">
+            <field name="name">view.calendar.event.stop.timer.wizard.form</field>
+            <field name="model">calendar.event.stop.timer.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Warning">
+                    <span>Please allocate time to the agenda:</span>
+                    <group>
+                        <field name="partner_ids" invisible="1"/>
+                        <field name="to_allocate_time" widget="float_time" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Agenda">
+                            <field name="calendar_event_wizard_agenda_temporary_ids">
+                                <tree delete="false" create="false" editable="bottom" default_order="agenda_name">
+                                    <field name="agenda_name" readonly="1"/>
+                                    <field name="agenda_partner_id" readonly="1"/>
+                                    <field name="agenda_target_duration" readonly="1" widget="float_time" sum="Total Target"/>
+                                    <field name="agenda_actual_duration"  widget="float_time" sum="Total Actual"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="agenda_name" readonly="1"/>
+                                        <field name="agenda_partner_id" domain="[('id', 'in', context.get('parent_partner_ids'))]" readonly="1"/>
+                                        <field name="agenda_target_duration" readonly="1" widget="float_time"/>
+                                        <field name="agenda_actual_duration" widget="float_time"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="confirm_time_allocation" string="Stop and Allocate Time" type="object" class="oe_highlight bombutton"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="calendar_meeting_mom_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <h2>
+                            Meeting Summary
+                        </h2>
+                        <div>
+                            <ul style="list-style: none;">
+                                <li>
+                                    Subject: <span t-field="o.name"/>
+                                </li>
+                                <li>
+                                    Date: <span t-field="o.start_date"/>
+                                </li>
+                                <br/>
+                                <li>
+                                    List of participants:
+                                    <ul class="col-xs-offset-1 col-xs-11">
+                                        <t t-foreach="o.attendee_ids" t-as="x">
+                                            <li>
+                                                <span t-field="x.partner_id.name"/><span t-if="x.partner_id.company_id.name">, <span t-field="x.partner_id.company_id.name"/></span><span t-if="x.role.name">, <span t-field="x.role.name"/></span> / <span t-if="x.effective_presence"> Participated </span> <span t-if="not x.effective_presence"> Did not Participate </span>
+                                            </li>
+                                        </t>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Agenda:
+                                    <br/>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                           <th>Subject</th>
+                                           <th>Speaker</th>
+                                           <th class="text-right">Target Duration</th>
+                                           <th class="text-right">Actual Duration</th>
+                                         </tr>
+                                         <t t-foreach="o.fal_meeting_agenda_ids" t-as="x">
+                                            <tr>
+                                                <td><span t-field="x.name"/></td>
+                                                <td><span t-field="x.partner_id.name"/></td>
+                                                <td class="text-right"><t t-esc="'%02d:%02d' % (int(str(x.target_duration).split('.')[0]), int(round(float(str('%.2f' % x.target_duration).split('.')[1])/100*60, 0)))" /></td>
+                                                <td class="text-right"><t t-esc="'%02d:%02d' % (int(str(x.actual_duration).split('.')[0]), int(round(float(str('%.2f' % x.actual_duration).split('.')[1])/100*60, 0)))" /></td>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                        <p style="page-break-after:always;">   </p>
+                        <h2>
+                            Statistics
+                        </h2>
+                        <div>
+                            <div class="col-xs-5">
+                                <h4>
+                                    Duration:
+                                </h4>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>
+                                            Target duration of the meeting:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="'%02d:%02d' % (int(str(o.fal_total_target_duration).split('.')[0]), int(round(float(str('%.2f' % o.fal_total_target_duration).split('.')[1])/100*60, 0)))" /></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Actual duration of the meeting:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="'%02d:%02d' % (int(str(o.fal_total_actual_duration).split('.')[0]), int(round(float(str('%.2f' % o.fal_total_actual_duration).split('.')[1])/100*60, 0)))" /></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Duration gap:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="'%02d:%02d' % (int(str(o.fal_actual_duration_gap).split('.')[0]), int(round(float(str('%.2f' % o.fal_actual_duration_gap).split('.')[1])/100*60, 0)))" /></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <h4>
+                                    Costs:
+                                </h4>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>
+                                            Target cost of the meeting:
+                                        </td>
+                                        <td class="text-right"><span t-field="o.fal_estimated_cost" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Actual cost of the meeting:
+                                        </td>
+                                        <td class="text-right"><span t-field="o.fal_actual_cost" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Cost gap:
+                                        </td>
+                                        <td class="text-right"><span t-field="o.fal_cost_gap" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-xs-offset-2 col-xs-5">
+                                <h4>
+                                    Participants:
+                                </h4>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>
+                                            Number of invited people:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="len(o.attendee_ids)" /></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Number of expected people:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="len(o.env['calendar.attendee'].search([('event_id', '=', o.id),('state', '=', 'accepted')]))" /></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Number of participants:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="len(o.env['calendar.attendee'].search([('event_id', '=', o.id),('effective_presence', '=', True)]))" /></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <h4>
+                                    Content:
+                                </h4>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>
+                                            Number of subjects forecasted:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="len(o.fal_meeting_agenda_ids)" /></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Number of subjects addressed:
+                                        </td>
+                                        <td class="text-right"><span> <t t-esc="len(o.env['fal.meeting.agenda'].search([('calendar_event_id', '=', o.id),('actual_duration', '&gt;', 0)]))" /></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <p style="page-break-after:always;">   </p>
+                        <h2>
+                            Minutes of Meeting
+                        </h2>
+                        <p>
+                            <span t-field="o.meeting_mom"/>
+                        </p>
+
+                        <p style="page-break-after:always;">   </p>
+                        <h2>
+                            Activity List
+                        </h2>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>
+                                    Document Name
+                                </th>
+                                <th>
+                                    Activity
+                                </th>
+                                <th>
+                                    Summary
+                                </th>
+                                <th>
+                                    Due Date
+                                </th>
+                                <t t-foreach="o.activity_ids" t-as="a">
+                                    <tr>
+                                        <td><span t-field="a.res_name"/></td>
+                                        <td><span t-field="a.activity_type_id"/></td>
+                                        <td><span t-field="a.summary"/></td>
+                                        <td><span t-field="a.date_deadline"/></td>
+                                    </tr>
+                                </t>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

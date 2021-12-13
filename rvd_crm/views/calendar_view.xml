@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_calendar_event_form_inherit" model="ir.ui.view">
+            <field name="name">calendar.event.form.inherit</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='partner_ids']" position="attributes">
+                    <attribute name="groups">sales_team.group_sale_manager</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_ids']" position="attributes">
+                    <attribute name="groups">sales_team.group_sale_manager</attribute>
+                </xpath>
+                <xpath expr="//h2" position="after">
+                    <label for="partner_sales_ids" string="Attendees For Sales" class="oe_edit_only" groups='sales_team.group_sale_salesman'/>
+                    <h2>
+                        <field name="partner_sales_ids" widget="many2manyattendee"
+                            placeholder="Select attendees Sales"
+                            context="{'force_email':True}"
+                            class="oe_inline"
+                            groups='sales_team.group_sale_salesman'/>
+                    </h2>
+                </xpath>
+                <!-- <xpath expr="//notebook/page[@name='page_options']" position="after"> -->
+            </field>
+        </record>
+
+        <record id="view_calendar_event_form_inherit_rivindi" model="ir.ui.view">
+            <field name="name">calendar.event.form.inherit</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="fal_calendar_meeting_ext.view_calendar_event_form_fal"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='mom']/notebook" position="inside">
+                    <page string="Upload Image">
+                        <field name="rvd_image_ids">
+                            <kanban>
+                                <field name="name"/>
+                                <field name="document" widget="image" />
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div t-attf-class="oe_kanban_global_click">
+                                            <div class="o_kanban_image">
+                                                <field name="document" widget="image" />
+                                          </div>  
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                            <form>
+                                <field name="document" widget="image"/>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<odoo>
+
+    <template id="activity_meeting_assets_backend" name="activity_meeting_assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/fal_activity_meeting/static/src/js/fal_activity_meeting.js"/>
+        </xpath>
+    </template>
+    
+</odoo>

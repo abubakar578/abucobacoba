@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="record_crm_view_form" model="ir.ui.view">
+        <field name="name">record.crm.form</field>
+        <field name="model">record.crm</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>
+                        <field name="crm_lead_id"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="new_date"/>
+                            <field name="new_stage"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="old_date"/>
+                            <field name="old_stage"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model='ir.ui.view' id='record_crm_tree'>
+        <field name='name'>record.crm.tree</field>
+        <field name='model'>record.crm</field>
+        <field name='arch' type='xml'>
+            <tree string='Tracking'>
+                <field name='crm_lead_id'/>
+                <field name='new_date'/>
+                <field name='old_date'/>
+                <field name="duration"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tracking_stage">
+        <field name="name">Record Crm</field>
+        <field name="res_model">record.crm</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_empty_folder">
+            No Provision
+          </p><p>
+            From this report, you can have an overview of your Provision. The
+            search bar can also be used to personalize your provision recognition reporting.
+          </p>
+        </field>
+    </record>
+</odoo>

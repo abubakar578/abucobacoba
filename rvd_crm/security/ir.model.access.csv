@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_record_crm,access_record_crm,model_record_crm,base.group_user,1,1,1,1
+access_record_activity,access_record_activity,model_record_activity,base.group_user,1,1,1,1
+access_crm_report_sales,access_crm_report_sales,model_crm_report_sales,base.group_user,1,1,1,1
+access_rvd_relation_sales,access_rvd_relation_sales,model_rvd_relation_sales,base.group_user,1,1,1,1
+access_rvd_meeting_image,access_rvd_meeting_image,model_rvd_meeting_image,base.group_user,1,1,1,1

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="rivindi_crm_user_target_form" model="ir.ui.view">
+            <field name="name">rivindi.crm.user.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='references']" position="after">
+                    <page name="sales_restriction" string="Sales">
+                        <group>
+                            <field name="is_sales_person" string="Sales Person"/>
+                            <field name="is_sales_admin" string="CSS"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
