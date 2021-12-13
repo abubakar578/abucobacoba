@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="True">
+        <!--
+        Resource: res.partner.title
+        -->
+        <record id="res_partner_title_s_prop" model="res.partner.title">
+            <field name="name">Sole Proprietorship</field>
+            <field name="shortcut">SP</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_l_part" model="res.partner.title">
+            <field name="name">Limited Partnerships</field>
+            <field name="shortcut">LP</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_ll_part" model="res.partner.title">
+            <field name="name">Limited Liability Partnerships</field>
+            <field name="shortcut">LLP</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_ll_corp" model="res.partner.title">
+            <field name="name">Limited Liability Company</field>
+            <field name="shortcut">LLC</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_c_corp" model="res.partner.title">
+            <field name="name">Corporation</field>
+            <field name="shortcut">C Corp</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_b_corp" model="res.partner.title">
+            <field name="name">Benefit Corporation</field>
+            <field name="shortcut">B Corp</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_s_corp" model="res.partner.title">
+            <field name="name">S Corporation</field>
+            <field name="shortcut">S Corp</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_cl_corp" model="res.partner.title">
+            <field name="name">Close Corporation</field>
+            <field name="shortcut">Close Corp</field>
+            <field name="fal_is_company">1</field>
+        </record>
+        <record id="res_partner_title_np_corp" model="res.partner.title">
+            <field name="name">Nonprofit Corporation</field>
+            <field name="shortcut">Nonprofit Corp</field>
+            <field name="fal_is_company">1</field>
+        </record>
+    </data>
+</odoo>

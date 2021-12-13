@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fal_res_partner_title_tree_inherit" model="ir.ui.view">
+            <field name="name">fal_res_partner_title_tree_inherit</field>
+            <field name="model">res.partner.title</field>
+            <field name="inherit_id" ref="base.view_partner_title_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='shortcut']" position='after'>
+                    <field name="fal_is_company"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fal_res_partner_title_form_inherit" model="ir.ui.view">
+            <field name="name">fal_res_partner_title_form_inherit</field>
+            <field name="model">res.partner.title</field>
+            <field name="inherit_id" ref="base.view_partner_title_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='shortcut']" position='after'>
+                    <field name="fal_is_company"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fal_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">fal_res_partner_form_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="title" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                    <attribute name="domain">[('fal_is_company', '=', is_company)]</attribute>
+                    <attribute name="context">{'default_fal_is_company': is_company}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

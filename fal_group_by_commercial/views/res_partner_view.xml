@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_fal_gbc" model="ir.ui.view">
+            <field name="name">res.partner.fal.gbc</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']/div[@class='o_row']/field[@name='parent_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': False}</attribute>
+                </xpath>
+                <xpath expr="//sheet/group[1]/group[1]/div[@class='o_address_format']/field[@name='street']" position="before">
+                    <field name="is_company" invisible="1"/>
+                </xpath>
+                <xpath expr="//notebook/page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group[1]/group[1]/div[1]/div[@class='o_address_format']/field[@name='street']" position="before">
+                    <field name="is_company" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='street2']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('parent_id', '!=', False),('is_company', '=', False)]}</attribute> 
+                </xpath>
+            </field>
+        </record>
+
+        <!-- <record id="view_partner_short_fal_gbc" model="ir.ui.view">
+            <field name="name">res.partner.short.fal.gbc</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_short_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="attributes">
+                    <attribute name="attrs"></attribute> 
+                </field>
+                <xpath expr="//field[@name='street']" position="before">
+                    <field name="is_company" invisible="1"/>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='street2']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="///field[@name='vat']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('parent_id','!=',False),('is_company', '=', False)]}</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="view_partner_address_form_fal_gbc" model="ir.ui.view">
+            <field name="name">res.partner.address.fal.gbc</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_address_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="attributes">
+                    <attribute name="attrs"></attribute> 
+                </field>
+                <xpath expr="//form/group[1]/group[1]/div[@class='o_address_format']/field[@name='street']" position="before">
+                    <field name="is_company" invisible="1"/>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='street']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='street2']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='city']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='state_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='zip']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='country_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': ['|', ('parent_id', '=', False), ('type', '!=', 'contact'),('is_company', '=', False)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partner_search_fal_gbc" model="ir.ui.view">
+            <field name="name">res.partner.search.fal.gbc</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="///search" position="inside">
+                    <searchpanel>
+                        <field name="parent_id" icon="fa-building"/>
+                    </searchpanel>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

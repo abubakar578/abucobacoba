@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* fal_group_by_commercial
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-29 09:09+0000\n"
+"PO-Revision-Date: 2019-11-29 10:13+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fr\n"
+"X-Generator: Poedit 2.2.3\n"
+
+#. module: fal_group_by_commercial
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_account_move__commercial_partner_id
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_purchase_order__commercial_partner_id
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_sale_order__commercial_partner_id
+msgid "Commercial Entity"
+msgstr "Entité commerciale"
+
+#. module: fal_group_by_commercial
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_account_invoice_filter_fal_gc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_purchase_order_filter_fal_gc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_purchase_order_search_fal_gc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_sales_order_filter_fal_gbc
+msgid "Commercial Partner"
+msgstr "Partenaire Commercial"
+
+#. module: fal_group_by_commercial
+#: model:ir.model,name:fal_group_by_commercial.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: fal_group_by_commercial
+#: model:ir.model,name:fal_group_by_commercial.model_account_move
+msgid "Journal Entries"
+msgstr "Pièces comptables"
+
+#. module: fal_group_by_commercial
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_account_move__fal_parent_company
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_purchase_order__fal_parent_company
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_res_partner__fal_parent_company
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_res_users__fal_parent_company
+#: model:ir.model.fields,field_description:fal_group_by_commercial.field_sale_order__fal_parent_company
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_account_invoice_filter_fal_gc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_partner_fal_gbc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_purchase_order_filter_fal_gc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_purchase_order_search_fal_gc
+#: model_terms:ir.ui.view,arch_db:fal_group_by_commercial.view_sales_order_filter_fal_gbc
+msgid "Parent Company"
+msgstr "Société mère"
+
+#. module: fal_group_by_commercial
+#: model:ir.model,name:fal_group_by_commercial.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: fal_group_by_commercial
+#: model:ir.model,name:fal_group_by_commercial.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: fal_group_by_commercial
+#: model:ir.model.fields,help:fal_group_by_commercial.field_account_move__fal_parent_company
+#: model:ir.model.fields,help:fal_group_by_commercial.field_purchase_order__fal_parent_company
+#: model:ir.model.fields,help:fal_group_by_commercial.field_sale_order__fal_parent_company
+msgid "The Parent Company for group"
+msgstr "Société Mère du groupe"
+
+#. module: fal_group_by_commercial
+#: model:ir.model.fields,help:fal_group_by_commercial.field_account_move__commercial_partner_id
+#: model:ir.model.fields,help:fal_group_by_commercial.field_purchase_order__commercial_partner_id
+#: model:ir.model.fields,help:fal_group_by_commercial.field_sale_order__commercial_partner_id
+msgid "The commercial entity that will be used on Journal Entries for this invoice"
+msgstr "L'entité commerciale qui sera utilisée sur les entrées de journal pour cette facture"
+
+#. module: fal_group_by_commercial
+#: code:addons/fal_group_by_commercial/models/res_partner.py:0
+#, python-format
+msgid "You cannot create a recursive Parent Company."
+msgstr "Vous ne pouvez pas créer une société mère recursive."
