@@ -35,7 +35,7 @@
         'security/ir.model.access.csv',
         'data/fal_meeting_meter_data.xml',
         'data/fal_meeting_meter_config.xml',
-        'data/fal_mom_template_data.xml',
+        # 'data/fal_mom_template_data.xml',
         'views/calendar_event.xml',
         'views/res_config_views.xml',
         'views/res_partner_view.xml',
