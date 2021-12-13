@@ -329,7 +329,6 @@
     'default_composition_mode': 'comment',
     'mail_post_autofollow': True,
     'default_use_template': True,
-    'default_template_id': ref('fal_calendar_meeting_ext.fal_email_template_public_mom'),
     'force_email': True,
     'custom_layout': 'mail.mail_notification_light',
                 }"/>
